@@ -1,0 +1,36 @@
+name: Deploy to track-price-changes
+
+on:
+  push:
+    branches: ['master']
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        run: |
+          echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+
+      - name: Build Docker image
+        run: |
+          docker build -t track-price-changes-app:latest .
+          docker tag laravel-app ${{ secrets.DOCKER_USERNAME }}/track-price-changes-app:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/track-price-changes-app:latest
+
+      - name: Deploy to track-price-changes
+        uses: appleboy/ssh-action@master
+        with:
+          host: secrets.EC2_PUBLIC_IP
+          username: secrets.EC2_USERNAME
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            docker pull  ${{ secrets.DOCKER_USERNAME }}/track-price-changes-app:latest
+            docker stop track-price-changes-container || true
+            docker rm track-price-changes-container || true
+            docker run -d --name track-price-changes-container -p 80:80 ${{ secrets.DOCKER_USERNAME }}/track-price-changes-app:latest
