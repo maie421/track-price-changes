@@ -7,4 +7,4 @@ COPY flask /app
 
 WORKDIR /app
 
-CMD ["python3", "-m", "flask", "run"]
+CMD ["python3", "-m", "flask", "run", "--prot=80"]
