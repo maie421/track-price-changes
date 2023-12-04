@@ -19,7 +19,7 @@ jobs:
       - name: Build Docker image
         run: |
           docker build -t track-price-changes-app:latest .
-          docker tag laravel-app ${{ secrets.DOCKER_USERNAME }}/track-price-changes-app:latest
+          docker tag track-price-changes-app ${{ secrets.DOCKER_USERNAME }}/track-price-changes-app:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/track-price-changes-app:latest
 
       - name: Deploy to track-price-changes
