@@ -1,3 +1,4 @@
 cryptography
 pymysql
 requests
+bs4
