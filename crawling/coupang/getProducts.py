@@ -7,8 +7,8 @@ import sys
 # conn = pymysql.connect(host='13.124.180.172', user='batch', password='track', db='log', charset='utf8')
 print(sys.argv[1])
 
-# conn = pymysql.connect(host=f"'{sys.argv[1]}'", user=f"'{sys.argv[2]}'", password=f"'{sys.argv[3]}'", db='log', charset='utf8')
-# cur = conn.cursor()
+conn = pymysql.connect(host = {sys.argv[1]}, user={sys.argv[2]}, password={sys.argv[3]}, db='log', charset='utf8')
+cur = conn.cursor()
 
 
 def getProducts(string):
@@ -60,8 +60,8 @@ def getProducts(string):
 
             sql_statement = sql_statement.rstrip(", ")
             print(sql_statement)
-            cur.execute(sql_statement)
-            conn.commit()
+            # cur.execute(sql_statement)
+            # conn.commit()
         else:
             return []
 
