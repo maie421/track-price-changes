@@ -1,4 +1,4 @@
 cryptography
-BeautifulSoup
+BeautifulSoup4
 re
 pymysql

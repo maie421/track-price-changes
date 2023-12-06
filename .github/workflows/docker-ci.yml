@@ -2,7 +2,7 @@ name: Deploy to track-price-changes
 
 on:
   push:
-    branches: ['master']
+#    branches: ['master']
 
 jobs:
   deploy:
