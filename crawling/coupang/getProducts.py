@@ -5,9 +5,16 @@ import pymysql
 import sys
 
 # conn = pymysql.connect(host='13.124.180.172', user='batch', password='track', db='log', charset='utf8')
-print(sys.argv[1])
 
-conn = pymysql.connect(host = {sys.argv[1]}, user={sys.argv[2]}, password={sys.argv[3]}, db='log', charset='utf8')
+if len(sys.argv) >= 4:
+    host = str(sys.argv[1])
+    user = str(sys.argv[2])
+    password = str(sys.argv[3])
+
+    conn = pymysql.connect(host=host, user=user, password=password, db='log', charset='utf8')
+else:
+    print("Usage: python script.py <host> <user> <password>")
+
 cur = conn.cursor()
 
 
