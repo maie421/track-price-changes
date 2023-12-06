@@ -64,8 +64,8 @@ def getProducts(string):
 
             sql_statement = sql_statement.rstrip(", ")
             print(sql_statement)
-            # cur.execute(sql_statement)
-            # conn.commit()
+            cur.execute(sql_statement)
+            conn.commit()
         else:
             return []
 
