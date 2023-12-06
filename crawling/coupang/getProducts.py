@@ -4,7 +4,8 @@ import re
 import pymysql
 import sys
 
-conn = pymysql.connect(host=f"'{sys.argv[1]}'", user=f"'{sys.argv[2]}'", password=f"'{sys.argv[3]}'", db='log', charset='utf8')
+conn = pymysql.connect(host='13.124.180.172', user='batch', password='track', db='log', charset='utf8')
+# conn = pymysql.connect(host=f"'{sys.argv[1]}'", user=f"'{sys.argv[2]}'", password=f"'{sys.argv[3]}'", db='log', charset='utf8')
 cur = conn.cursor()
 
 
