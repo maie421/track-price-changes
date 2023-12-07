@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import re
 import sys
 
-conn = db_connect()
+conn = db_connect(sys)
 cur = conn.cursor()
 
 def getProducts(string):

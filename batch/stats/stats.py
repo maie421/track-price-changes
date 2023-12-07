@@ -1,6 +1,6 @@
 import sys
 import pandas as pd
-from batch.dbConnect import db_connect_test
+from batch.testDbConnect import db_connect_test
 from datetime import datetime
 
 conn = db_connect_test()

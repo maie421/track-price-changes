@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="49.247.174.57" uuid="ace19412-5c9c-4f8f-921a-a93881a8bc3a">
+    <data-source source="LOCAL" name="track-price-changes" uuid="ace19412-5c9c-4f8f-921a-a93881a8bc3a">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mariadb://49.247.174.57:3306?allowPublicKeyRetrieval=true&amp;useSSL=false</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name=" track-price-changes" uuid="211684cf-d97a-4e04-b7cd-8f9112ff3d0c">
-      <driver-ref>mysql_aurora</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mariadb://13.124.180.172:3306?allowPublicKeyRetrieval=true&amp;useSSL=false</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
