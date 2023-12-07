@@ -1147,8 +1147,8 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <CollationName>utf8mb3_general_ci</CollationName>
     </schema>
     <schema id="289" parent="1" name="log">
-      <IntrospectionTimestamp>2023-12-07.23:47:29</IntrospectionTimestamp>
-      <LocalIntrospectionTimestamp>2023-12-07.05:47:29</LocalIntrospectionTimestamp>
+      <IntrospectionTimestamp>2023-12-08.00:05:24</IntrospectionTimestamp>
+      <LocalIntrospectionTimestamp>2023-12-07.06:05:24</LocalIntrospectionTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="290" parent="1" name="mysql">
@@ -1161,8 +1161,8 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="293" parent="1" name="track-price-changes">
-      <IntrospectionTimestamp>2023-12-07.23:47:29</IntrospectionTimestamp>
-      <LocalIntrospectionTimestamp>2023-12-07.05:47:29</LocalIntrospectionTimestamp>
+      <IntrospectionTimestamp>2023-12-08.00:05:24</IntrospectionTimestamp>
+      <LocalIntrospectionTimestamp>2023-12-07.06:05:24</LocalIntrospectionTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <user id="294" parent="1" name="batch">

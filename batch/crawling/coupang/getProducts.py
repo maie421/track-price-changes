@@ -1,10 +1,18 @@
 from stringgetter import getPageString
-from batch.dbConnect import db_connect
+import pymysql
 from bs4 import BeautifulSoup
 import re
 import sys
 
-conn = db_connect(sys)
+if len(sys.argv) >= 4:
+    host = str(sys.argv[1])
+    user = str(sys.argv[2])
+    password = str(sys.argv[3])
+
+    conn = pymysql.connect(host=host, user=user, password=password, db='log', charset='utf8')
+else:
+    print("Usage: python script.py <host> <user> <password>")
+
 cur = conn.cursor()
 
 def getProducts(string):

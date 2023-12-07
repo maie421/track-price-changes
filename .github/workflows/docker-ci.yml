@@ -2,7 +2,7 @@ name: 서비스 배포
 
 on:
   push:
-    branches: ['master']
+    branches: ['test']
 
 jobs:
   deploy:
