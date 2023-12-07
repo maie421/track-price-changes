@@ -2,7 +2,7 @@ name: 서비스 배포
 
 on:
   push:
-    branches: ['test']
+    branches: ['master']
 
 jobs:
   deploy:
@@ -20,7 +20,7 @@ jobs:
         run: |
           docker build -t track-price-changes-app:latest .
           docker tag track-price-changes-app maie421/track-price-changes-app:latest
-          docker push maie421/track-price-changes-app:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/track-price-changes-app:latest
 
       - name: Deploy to track-price-changes
         uses: appleboy/ssh-action@master
