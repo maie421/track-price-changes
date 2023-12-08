@@ -1,6 +1,5 @@
 import sys
 import pandas as pd
-from sqlalchemy import create_engine
 from batch.testDbConnect import db_connect_test
 from datetime import datetime, timedelta
 import logging

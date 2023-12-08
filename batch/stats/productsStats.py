@@ -2,7 +2,6 @@ import sys
 import pymysql
 import pandas as pd
 from datetime import datetime
-import logging
 
 if len(sys.argv) >= 4:
     host = str(sys.argv[1])
