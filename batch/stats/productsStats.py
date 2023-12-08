@@ -47,6 +47,7 @@ for j in modified_numbers:
     vals = (j, start_date, end_date)
     cur.execute(sql, vals)
     existing_data = cur.fetchall()
+    print(existing_data)
 
     df_temp = pd.DataFrame(existing_data, columns=['product_id', 'price'])
     df_temp_stats = df_temp.groupby('product_id')['price'].agg(['max', 'min', 'mean']).reset_index()
@@ -74,7 +75,7 @@ for j in modified_numbers:
             print("insert : ", insert_query)
             cur.execute(insert_query)
 
-        # conn.commit()
+        conn.commit()
 
     select_sql_query = """
         SELECT p.product_id, p.price, name, image, category_id
