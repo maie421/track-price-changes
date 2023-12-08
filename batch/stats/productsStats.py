@@ -1,16 +1,22 @@
 import sys
+import pymysql
 import pandas as pd
-from sqlalchemy import create_engine
-from batch.testDbConnect import db_connect_test
-from datetime import datetime, timedelta
+from datetime import datetime
 import logging
 
-conn = db_connect_test()
+if len(sys.argv) >= 4:
+    host = str(sys.argv[1])
+    user = str(sys.argv[2])
+    password = str(sys.argv[3])
+
+    conn = pymysql.connect(host=host, user=user, password=password, db='log', charset='utf8')
+else:
+    print("Usage: python script.py <host> <user> <password>")
 
 # pymysql 로그 활성화
-pymysql_logger = logging.getLogger('pymysql')
-pymysql_logger.setLevel(logging.DEBUG)
-pymysql_logger.addHandler(logging.StreamHandler())
+# pymysql_logger = logging.getLogger('pymysql')
+# pymysql_logger.setLevel(logging.DEBUG)
+# pymysql_logger.addHandler(logging.StreamHandler())
 
 # SQLAlchemy 로그 활성화
 # logging.basicConfig()
@@ -26,8 +32,8 @@ cur = conn.cursor()
 # 502489 : "어린이 만들기 겸용"
 # 502490 : "중식요리"
 # 502491 : "기타요리"
-# original_numbers = {502483, 502484, 502485, 502486, 502487, 502489, 502490, 502491}
-original_numbers = {502483}
+original_numbers = {502483, 502484, 502485, 502486, 502487, 502489, 502490, 502491}
+# original_numbers = {502483}
 
 modified_numbers = {str(num)[:3] + '3' + str(num)[4:] for num in original_numbers}
 
@@ -54,24 +60,57 @@ for j in modified_numbers:
         low_price = row['low_price']
         avg_price = row['avg_price']
 
-        # Check if the product_id already exists in the table
         cur.execute(
-            f"SELECT id FROM track_price_changes.products_stats WHERE created_at >= '{start_date}' AND created_at <= '{end_date}' and product_id = {product_id}")
+            f"SELECT id FROM track_price_changes.products_stats WHERE product_id = {product_id} and created_at >= '{start_date}' AND created_at <= '{end_date}'")
 
         existing_data = cur.fetchone()
         if existing_data:
-            # If product_id exists, update the existing row
             update_query = f"UPDATE track_price_changes.products_stats SET high_price = {high_price}, " \
                            f"low_price = {low_price}, avg_price = {avg_price} WHERE id = {existing_data[0]}"
             print("update : ", update_query)
             cur.execute(update_query)
         else:
-            # If product_id does not exist, insert a new row
             insert_query = f"INSERT INTO track_price_changes.products_stats (product_id, high_price, low_price, avg_price) " \
                            f"VALUES ({product_id}, {high_price}, {low_price}, {avg_price})"
             print("insert : ", insert_query)
             cur.execute(insert_query)
 
+        # conn.commit()
+
+    select_sql_query = """
+        SELECT p.product_id, p.price, name, image, category_id
+        FROM log.products p
+        JOIN (
+            SELECT product_id, MAX(created_at) AS max_created_at
+            FROM log.products
+            WHERE category_id = %s
+            AND created_at >= %s AND created_at <= %s
+            GROUP BY product_id
+        ) AS max_dates
+        ON p.product_id = max_dates.product_id AND p.created_at = max_dates.max_created_at
+        WHERE p.category_id = %s
+        AND created_at >= %s AND created_at <= %s
+    """
+    cur.execute(select_sql_query, (j, start_date, end_date, j, start_date, end_date))
+
+    # 결과 가져오기
+    data = cur.fetchall()
+    print(select_sql_query)
+    # 결과 출력
+    for item in data:
+        sql_query = """
+            INSERT IGNORE INTO track_price_changes.products (product_id, price, name, image, category_id)
+            VALUES (%s, %s, %s, %s, %s)
+            ON DUPLICATE KEY UPDATE
+                price = VALUES(price),
+                name = VALUES(name),
+                image = VALUES(image),
+                category_id = VALUES(category_id)
+        """
+        cur.execute(sql_query, item)
         conn.commit()
+        # 확인을 위해 rowcount 출력
+        print(f"Rowcount for {item}: {cur.rowcount}")
+
 cur.close()
 conn.close()
