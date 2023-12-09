@@ -3,7 +3,7 @@ name: 서비스 배포
 on:
   push:
     paths:
-      - 'flask/**'
+      - 'web/**'
     branches: ['master']
   workflow_dispatch:
 
