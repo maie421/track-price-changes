@@ -1,1 +1,6 @@
 Flask==3.0.0
+cryptography
+pymysql
+requests
+bs4
+pandas
