@@ -3,18 +3,16 @@ import pymysql
 import pandas as pd
 from datetime import datetime, timedelta
 
-from batch.testDbConnect import db_connect_test
+if len(sys.argv) >= 4:
+    host = str(sys.argv[1])
+    user = str(sys.argv[2])
+    password = str(sys.argv[3])
 
-# if len(sys.argv) >= 4:
-#     host = str(sys.argv[1])
-#     user = str(sys.argv[2])
-#     password = str(sys.argv[3])
-#
-#     conn = pymysql.connect(host=host, user=user, password=password, db='log', charset='utf8')
-# else:
-#     print("Usage: python script.py <host> <user> <password>")
+    conn = pymysql.connect(host=host, user=user, password=password, db='log', charset='utf8')
+else:
+    print("Usage: python script.py <host> <user> <password>")
 
-conn = db_connect_test()
+# conn = db_connect_test()
 
 # pymysql 로그 활성화
 # pymysql_logger = logging.getLogger('pymysql')
