@@ -1,14 +1,14 @@
 import pandas as pd
 from flask import render_template
 
-# from testDbConnect import db_connect_test
-from dbConnect import db_connect
+from testDbConnect import db_connect_test
+# from dbConnect import db_connect
 
 
 class Products:
-    def __init__(self, app, sys):
+    def __init__(self, app):
         self.app = app
-        self.db_conn = db_connect(sys)
+        self.db_conn = db_connect_test()
 
     def index(self):
         try:
