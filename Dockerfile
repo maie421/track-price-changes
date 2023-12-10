@@ -1,6 +1,6 @@
 FROM python:3.9-alpine
 
-COPY flask/requirements.txt requirements.txt
+COPY web/requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
 COPY web /app
