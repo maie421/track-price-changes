@@ -1,18 +1,21 @@
 import pandas as pd
 from flask import render_template
 
+# from testDbConnect import db_connect_test
+from dbConnect import db_connect
+
 
 class Products:
-    def __init__(self, app, db_conn):
+    def __init__(self, app, sys):
         self.app = app
-        self.db_conn = db_conn
-        self.cursor = db_conn.cursor()
+        self.db_conn = db_connect(sys)
 
     def index(self):
         try:
-            self.cursor.execute("SELECT product_id, price, avg_price FROM track_price_changes.products")
-            data = self.cursor.fetchall()
-            df = pd.DataFrame(data, columns=['product_id', 'price', 'avg_price'])
+            cursor = self.db_conn.cursor()
+            cursor.execute("SELECT product_id, image, name, price, avg_price FROM track_price_changes.products;")
+            data = cursor.fetchall()
+            df = pd.DataFrame(data, columns=['product_id','image','name', 'price', 'avg_price'])
 
             df['discount_rate'] = (df.avg_price - df.price) / df.avg_price * 100
 
@@ -21,11 +24,15 @@ class Products:
             # print(top_12_discounted)
             #
             # # Display the result
-            print(top_12_discounted[['product_id', 'price', 'avg_price', 'discount_rate']])
-
-            return render_template('index.html', user="반원", data={'level': 60, 'point': 360, 'exp': 45000})
+            # print(top_12_discounted[['product_id', 'price', 'avg_price', 'discount_rate']])
+            print(top_12_discounted)
+            return render_template('index.html', products=top_12_discounted.to_dict('records'))
         except Exception as e:
             print(f"Error executing SELECT statement: {e}")
-            return None
+            # You might want to log the exception or handle it appropriately
+            # For now, returning a simple error response
+            # return render_template('error.html', error_message=str(e))
         finally:
-            self.cursor.close()
+            if hasattr(cursor, 'closed') and not cursor.closed:
+                cursor.close()
+
