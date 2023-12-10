@@ -36,3 +36,6 @@ class Products:
             if hasattr(cursor, 'closed') and not cursor.closed:
                 cursor.close()
 
+
+    def getProduct(self):
+        return render_template('product.html')

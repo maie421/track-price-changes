@@ -10,6 +10,9 @@ product = Products(app)
 def index():
     return product.index()
 
+@app.route('/product')
+def getProduct():
+    return product.getProduct()
 
 if __name__ == "__main__":
     app.run()
