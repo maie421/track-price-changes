@@ -14,8 +14,8 @@
           <node kind="schema">
             <name qname="@" />
             <name qname="log" />
-            <name qname="track-price-changes" />
             <name qname="track_price_changes" />
+            <name qname="track-price-changes" />
           </node>
         </introspection-scope>
       </schema-mapping>

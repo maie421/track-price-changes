@@ -1,3 +1,5 @@
+import math
+
 import pandas as pd
 from flask import render_template
 
@@ -53,13 +55,14 @@ class Products:
         })
 
     def getCategory(self, category_id, paging):
-        per_page = 12
+        per_page = 24
 
         start = (paging - 1) * per_page
-        end = start + per_page
 
         cursor = self.db_conn.cursor()
-        cursor.execute(f"SELECT product_id, image, name, price, avg_price FROM track_price_changes.products where category_id = %s limit {start}, {end}", category_id)
+        category_select_sql = f"SELECT product_id, image, name, price, avg_price FROM track_price_changes.products where category_id = %s limit {per_page} offset {start}"
+        print(category_select_sql)
+        cursor.execute(category_select_sql, category_id)
         data = cursor.fetchall()
         df = pd.DataFrame(data, columns=['product_id', 'image', 'name', 'price', 'avg_price'])
 
@@ -70,12 +73,12 @@ class Products:
         result = cursor.fetchone()
 
         total_count = result[0]
-        page_size = total_count % per_page
+        page_size = total_count / per_page
         cursor.close()
 
         return render_template('category.html',
                                products=df.to_dict('records'),
                                page={
                                    'total_count': int(total_count),
-                                   'size': int(page_size)
+                                   'size': math.ceil(page_size)
                                })
