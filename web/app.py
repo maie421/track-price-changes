@@ -14,6 +14,10 @@ def index():
 def getProduct():
     return product.getProduct(request.args.get('pid'))
 
+@app.route('/category', methods=['GET'])
+def getCategory():
+    return product.getCategory(request.args.get('cat'), int(request.args.get('page')))
+
 if __name__ == "__main__":
     app.run()
     # app.run(port=80, debug=True)

@@ -14,7 +14,7 @@
                         <h1 class="display-6 fw-bolder">{{ product.name }}</h1>
                         <div class="fs-5 mb-5">
                             <span class="discount-box mx-2 fs-5" style="background-color: red;">
-                                {% if product.discount_rate|int > 0 %}
+                                {% if product.discount_rate|float > 0 %}
                                     ▼ {{ product.discount_rate|int }}%
                                 {% endif %}
                             </span>

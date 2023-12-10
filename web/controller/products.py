@@ -39,6 +39,7 @@ class Products:
 
         cursor.execute("SELECT max(high_price) as high_price, min(low_price) as low_price FROM track_price_changes.products_stats WHERE product_id = %s", pid)
         product_price_data = cursor.fetchone()
+        cursor.close()
 
         return render_template('product.html', product={
             'product_id': product_data[0],
@@ -50,3 +51,31 @@ class Products:
             'low_price': product_price_data[1],
             'discount_rate': discount_rate,
         })
+
+    def getCategory(self, category_id, paging):
+        per_page = 12
+
+        start = (paging - 1) * per_page
+        end = start + per_page
+
+        cursor = self.db_conn.cursor()
+        cursor.execute(f"SELECT product_id, image, name, price, avg_price FROM track_price_changes.products where category_id = %s limit {start}, {end}", category_id)
+        data = cursor.fetchall()
+        df = pd.DataFrame(data, columns=['product_id', 'image', 'name', 'price', 'avg_price'])
+
+        df['discount_rate'] = (df.avg_price - df.price) / df.avg_price * 100
+
+        query = "SELECT count(*) FROM track_price_changes.products where category_id = %s"
+        cursor.execute(query, category_id)
+        result = cursor.fetchone()
+
+        total_count = result[0]
+        page_size = total_count % per_page
+        cursor.close()
+
+        return render_template('category.html',
+                               products=df.to_dict('records'),
+                               page={
+                                   'total_count': int(total_count),
+                                   'size': int(page_size)
+                               })

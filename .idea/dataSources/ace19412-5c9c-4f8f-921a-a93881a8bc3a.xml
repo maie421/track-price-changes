@@ -5,284 +5,218 @@
       <DefaultCasing>exact</DefaultCasing>
       <DefaultEngine>InnoDB</DefaultEngine>
       <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
-      <Grants>|root||batch||ALTER|G
-|root||debian-sys-maint|localhost|ALTER|G
+      <Grants>|root||debian-sys-maint|localhost|ALTER|G
 |root||maie421||ALTER|G
 |root||root|localhost|ALTER|G
-|root||batch||ALTER ROUTINE|G
 |root||debian-sys-maint|localhost|ALTER ROUTINE|G
 |root||maie421||ALTER ROUTINE|G
 |root||root|localhost|ALTER ROUTINE|G
-|root||batch||APPLICATION_PASSWORD_ADMIN|G
 |root||debian-sys-maint|localhost|APPLICATION_PASSWORD_ADMIN|G
 |root||maie421||APPLICATION_PASSWORD_ADMIN|G
 |root||root|localhost|APPLICATION_PASSWORD_ADMIN|G
-|root||batch||AUDIT_ABORT_EXEMPT|G
 |root||maie421||AUDIT_ABORT_EXEMPT|G
 |root||mysql.infoschema|localhost|AUDIT_ABORT_EXEMPT|G
 |root||mysql.session|localhost|AUDIT_ABORT_EXEMPT|G
 |root||mysql.sys|localhost|AUDIT_ABORT_EXEMPT|G
 |root||root|localhost|AUDIT_ABORT_EXEMPT|G
-|root||batch||AUDIT_ADMIN|G
 |root||debian-sys-maint|localhost|AUDIT_ADMIN|G
 |root||maie421||AUDIT_ADMIN|G
 |root||root|localhost|AUDIT_ADMIN|G
-|root||batch||AUTHENTICATION_POLICY_ADMIN|G
 |root||debian-sys-maint|localhost|AUTHENTICATION_POLICY_ADMIN|G
 |root||maie421||AUTHENTICATION_POLICY_ADMIN|G
 |root||mysql.session|localhost|AUTHENTICATION_POLICY_ADMIN|G
 |root||root|localhost|AUTHENTICATION_POLICY_ADMIN|G
-|root||batch||BACKUP_ADMIN|G
 |root||debian-sys-maint|localhost|BACKUP_ADMIN|G
 |root||maie421||BACKUP_ADMIN|G
 |root||mysql.session|localhost|BACKUP_ADMIN|G
 |root||root|localhost|BACKUP_ADMIN|G
-|root||batch||BINLOG_ADMIN|G
 |root||debian-sys-maint|localhost|BINLOG_ADMIN|G
 |root||maie421||BINLOG_ADMIN|G
 |root||root|localhost|BINLOG_ADMIN|G
-|root||batch||BINLOG_ENCRYPTION_ADMIN|G
 |root||debian-sys-maint|localhost|BINLOG_ENCRYPTION_ADMIN|G
 |root||maie421||BINLOG_ENCRYPTION_ADMIN|G
 |root||root|localhost|BINLOG_ENCRYPTION_ADMIN|G
-|root||batch||CLONE_ADMIN|G
 |root||debian-sys-maint|localhost|CLONE_ADMIN|G
 |root||maie421||CLONE_ADMIN|G
 |root||mysql.session|localhost|CLONE_ADMIN|G
 |root||root|localhost|CLONE_ADMIN|G
-|root||batch||CONNECTION_ADMIN|G
 |root||debian-sys-maint|localhost|CONNECTION_ADMIN|G
 |root||maie421||CONNECTION_ADMIN|G
 |root||mysql.session|localhost|CONNECTION_ADMIN|G
 |root||root|localhost|CONNECTION_ADMIN|G
-|root||batch||CREATE|G
 |root||debian-sys-maint|localhost|CREATE|G
 |root||maie421||CREATE|G
 |root||root|localhost|CREATE|G
-|root||batch||CREATE ROLE|G
 |root||debian-sys-maint|localhost|CREATE ROLE|G
 |root||maie421||CREATE ROLE|G
 |root||root|localhost|CREATE ROLE|G
-|root||batch||CREATE ROUTINE|G
 |root||debian-sys-maint|localhost|CREATE ROUTINE|G
 |root||maie421||CREATE ROUTINE|G
 |root||root|localhost|CREATE ROUTINE|G
-|root||batch||CREATE TABLESPACE|G
 |root||debian-sys-maint|localhost|CREATE TABLESPACE|G
 |root||maie421||CREATE TABLESPACE|G
 |root||root|localhost|CREATE TABLESPACE|G
-|root||batch||CREATE TEMPORARY TABLES|G
 |root||debian-sys-maint|localhost|CREATE TEMPORARY TABLES|G
 |root||maie421||CREATE TEMPORARY TABLES|G
 |root||root|localhost|CREATE TEMPORARY TABLES|G
-|root||batch||CREATE USER|G
 |root||debian-sys-maint|localhost|CREATE USER|G
 |root||maie421||CREATE USER|G
 |root||root|localhost|CREATE USER|G
-|root||batch||CREATE VIEW|G
 |root||debian-sys-maint|localhost|CREATE VIEW|G
 |root||maie421||CREATE VIEW|G
 |root||root|localhost|CREATE VIEW|G
-|root||batch||DELETE|G
 |root||debian-sys-maint|localhost|DELETE|G
 |root||maie421||DELETE|G
 |root||root|localhost|DELETE|G
-|root||batch||DROP|G
 |root||debian-sys-maint|localhost|DROP|G
 |root||maie421||DROP|G
 |root||root|localhost|DROP|G
-|root||batch||DROP ROLE|G
 |root||debian-sys-maint|localhost|DROP ROLE|G
 |root||maie421||DROP ROLE|G
 |root||root|localhost|DROP ROLE|G
-|root||batch||ENCRYPTION_KEY_ADMIN|G
 |root||debian-sys-maint|localhost|ENCRYPTION_KEY_ADMIN|G
 |root||maie421||ENCRYPTION_KEY_ADMIN|G
 |root||root|localhost|ENCRYPTION_KEY_ADMIN|G
-|root||batch||EVENT|G
 |root||debian-sys-maint|localhost|EVENT|G
 |root||maie421||EVENT|G
 |root||root|localhost|EVENT|G
-|root||batch||EXECUTE|G
 |root||debian-sys-maint|localhost|EXECUTE|G
 |root||maie421||EXECUTE|G
 |root||root|localhost|EXECUTE|G
-|root||batch||FILE|G
 |root||debian-sys-maint|localhost|FILE|G
 |root||maie421||FILE|G
 |root||root|localhost|FILE|G
-|root||batch||FIREWALL_EXEMPT|G
 |root||maie421||FIREWALL_EXEMPT|G
 |root||mysql.infoschema|localhost|FIREWALL_EXEMPT|G
 |root||mysql.session|localhost|FIREWALL_EXEMPT|G
 |root||mysql.sys|localhost|FIREWALL_EXEMPT|G
 |root||root|localhost|FIREWALL_EXEMPT|G
-|root||batch||FLUSH_OPTIMIZER_COSTS|G
 |root||debian-sys-maint|localhost|FLUSH_OPTIMIZER_COSTS|G
 |root||maie421||FLUSH_OPTIMIZER_COSTS|G
 |root||root|localhost|FLUSH_OPTIMIZER_COSTS|G
-|root||batch||FLUSH_STATUS|G
 |root||debian-sys-maint|localhost|FLUSH_STATUS|G
 |root||maie421||FLUSH_STATUS|G
 |root||root|localhost|FLUSH_STATUS|G
-|root||batch||FLUSH_TABLES|G
 |root||debian-sys-maint|localhost|FLUSH_TABLES|G
 |root||maie421||FLUSH_TABLES|G
 |root||root|localhost|FLUSH_TABLES|G
-|root||batch||FLUSH_USER_RESOURCES|G
 |root||debian-sys-maint|localhost|FLUSH_USER_RESOURCES|G
 |root||maie421||FLUSH_USER_RESOURCES|G
 |root||root|localhost|FLUSH_USER_RESOURCES|G
-|root||batch||GROUP_REPLICATION_ADMIN|G
 |root||debian-sys-maint|localhost|GROUP_REPLICATION_ADMIN|G
 |root||maie421||GROUP_REPLICATION_ADMIN|G
 |root||root|localhost|GROUP_REPLICATION_ADMIN|G
-|root||batch||GROUP_REPLICATION_STREAM|G
 |root||debian-sys-maint|localhost|GROUP_REPLICATION_STREAM|G
 |root||maie421||GROUP_REPLICATION_STREAM|G
 |root||root|localhost|GROUP_REPLICATION_STREAM|G
-|root||batch||INDEX|G
 |root||debian-sys-maint|localhost|INDEX|G
 |root||maie421||INDEX|G
 |root||root|localhost|INDEX|G
-|root||batch||INNODB_REDO_LOG_ARCHIVE|G
 |root||debian-sys-maint|localhost|INNODB_REDO_LOG_ARCHIVE|G
 |root||maie421||INNODB_REDO_LOG_ARCHIVE|G
 |root||root|localhost|INNODB_REDO_LOG_ARCHIVE|G
-|root||batch||INNODB_REDO_LOG_ENABLE|G
 |root||debian-sys-maint|localhost|INNODB_REDO_LOG_ENABLE|G
 |root||maie421||INNODB_REDO_LOG_ENABLE|G
 |root||root|localhost|INNODB_REDO_LOG_ENABLE|G
-|root||batch||INSERT|G
 |root||debian-sys-maint|localhost|INSERT|G
 |root||maie421||INSERT|G
 |root||root|localhost|INSERT|G
-|root||batch||LOCK TABLES|G
 |root||debian-sys-maint|localhost|LOCK TABLES|G
 |root||maie421||LOCK TABLES|G
 |root||root|localhost|LOCK TABLES|G
-|root||batch||PASSWORDLESS_USER_ADMIN|G
 |root||debian-sys-maint|localhost|PASSWORDLESS_USER_ADMIN|G
 |root||maie421||PASSWORDLESS_USER_ADMIN|G
 |root||root|localhost|PASSWORDLESS_USER_ADMIN|G
-|root||batch||PERSIST_RO_VARIABLES_ADMIN|G
 |root||debian-sys-maint|localhost|PERSIST_RO_VARIABLES_ADMIN|G
 |root||maie421||PERSIST_RO_VARIABLES_ADMIN|G
 |root||mysql.session|localhost|PERSIST_RO_VARIABLES_ADMIN|G
 |root||root|localhost|PERSIST_RO_VARIABLES_ADMIN|G
-|root||batch||PROCESS|G
 |root||debian-sys-maint|localhost|PROCESS|G
 |root||maie421||PROCESS|G
 |root||root|localhost|PROCESS|G
-|root||batch||REFERENCES|G
 |root||debian-sys-maint|localhost|REFERENCES|G
 |root||maie421||REFERENCES|G
 |root||root|localhost|REFERENCES|G
-|root||batch||RELOAD|G
 |root||debian-sys-maint|localhost|RELOAD|G
 |root||maie421||RELOAD|G
 |root||root|localhost|RELOAD|G
-|root||batch||REPLICATION CLIENT|G
 |root||debian-sys-maint|localhost|REPLICATION CLIENT|G
 |root||maie421||REPLICATION CLIENT|G
 |root||root|localhost|REPLICATION CLIENT|G
-|root||batch||REPLICATION SLAVE|G
 |root||debian-sys-maint|localhost|REPLICATION SLAVE|G
 |root||maie421||REPLICATION SLAVE|G
 |root||root|localhost|REPLICATION SLAVE|G
-|root||batch||REPLICATION_APPLIER|G
 |root||debian-sys-maint|localhost|REPLICATION_APPLIER|G
 |root||maie421||REPLICATION_APPLIER|G
 |root||root|localhost|REPLICATION_APPLIER|G
-|root||batch||REPLICATION_SLAVE_ADMIN|G
 |root||debian-sys-maint|localhost|REPLICATION_SLAVE_ADMIN|G
 |root||maie421||REPLICATION_SLAVE_ADMIN|G
 |root||root|localhost|REPLICATION_SLAVE_ADMIN|G
-|root||batch||RESOURCE_GROUP_ADMIN|G
 |root||debian-sys-maint|localhost|RESOURCE_GROUP_ADMIN|G
 |root||maie421||RESOURCE_GROUP_ADMIN|G
 |root||root|localhost|RESOURCE_GROUP_ADMIN|G
-|root||batch||RESOURCE_GROUP_USER|G
 |root||debian-sys-maint|localhost|RESOURCE_GROUP_USER|G
 |root||maie421||RESOURCE_GROUP_USER|G
 |root||root|localhost|RESOURCE_GROUP_USER|G
-|root||batch||ROLE_ADMIN|G
 |root||debian-sys-maint|localhost|ROLE_ADMIN|G
 |root||maie421||ROLE_ADMIN|G
 |root||root|localhost|ROLE_ADMIN|G
-|root||batch||SELECT|G
 |root||debian-sys-maint|localhost|SELECT|G
 |root||maie421||SELECT|G
 |root||mysql.infoschema|localhost|SELECT|G
 |root||root|localhost|SELECT|G
-|root||batch||SENSITIVE_VARIABLES_OBSERVER|G
 |root||debian-sys-maint|localhost|SENSITIVE_VARIABLES_OBSERVER|G
 |root||maie421||SENSITIVE_VARIABLES_OBSERVER|G
 |root||root|localhost|SENSITIVE_VARIABLES_OBSERVER|G
-|root||batch||SERVICE_CONNECTION_ADMIN|G
 |root||debian-sys-maint|localhost|SERVICE_CONNECTION_ADMIN|G
 |root||maie421||SERVICE_CONNECTION_ADMIN|G
 |root||root|localhost|SERVICE_CONNECTION_ADMIN|G
-|root||batch||SESSION_VARIABLES_ADMIN|G
 |root||debian-sys-maint|localhost|SESSION_VARIABLES_ADMIN|G
 |root||maie421||SESSION_VARIABLES_ADMIN|G
 |root||mysql.session|localhost|SESSION_VARIABLES_ADMIN|G
 |root||root|localhost|SESSION_VARIABLES_ADMIN|G
-|root||batch||SET_USER_ID|G
 |root||debian-sys-maint|localhost|SET_USER_ID|G
 |root||maie421||SET_USER_ID|G
 |root||root|localhost|SET_USER_ID|G
-|root||batch||SHOW DATABASES|G
 |root||debian-sys-maint|localhost|SHOW DATABASES|G
 |root||maie421||SHOW DATABASES|G
 |root||root|localhost|SHOW DATABASES|G
-|root||batch||SHOW VIEW|G
 |root||debian-sys-maint|localhost|SHOW VIEW|G
 |root||maie421||SHOW VIEW|G
 |root||root|localhost|SHOW VIEW|G
-|root||batch||SHOW_ROUTINE|G
 |root||debian-sys-maint|localhost|SHOW_ROUTINE|G
 |root||maie421||SHOW_ROUTINE|G
 |root||root|localhost|SHOW_ROUTINE|G
-|root||batch||SHUTDOWN|G
 |root||debian-sys-maint|localhost|SHUTDOWN|G
 |root||maie421||SHUTDOWN|G
 |root||mysql.session|localhost|SHUTDOWN|G
 |root||root|localhost|SHUTDOWN|G
-|root||batch||SUPER|G
 |root||debian-sys-maint|localhost|SUPER|G
 |root||maie421||SUPER|G
 |root||mysql.session|localhost|SUPER|G
 |root||root|localhost|SUPER|G
-|root||batch||SYSTEM_USER|G
 |root||debian-sys-maint|localhost|SYSTEM_USER|G
 |root||maie421||SYSTEM_USER|G
 |root||mysql.infoschema|localhost|SYSTEM_USER|G
 |root||mysql.session|localhost|SYSTEM_USER|G
 |root||mysql.sys|localhost|SYSTEM_USER|G
 |root||root|localhost|SYSTEM_USER|G
-|root||batch||SYSTEM_VARIABLES_ADMIN|G
 |root||debian-sys-maint|localhost|SYSTEM_VARIABLES_ADMIN|G
 |root||maie421||SYSTEM_VARIABLES_ADMIN|G
 |root||mysql.session|localhost|SYSTEM_VARIABLES_ADMIN|G
 |root||root|localhost|SYSTEM_VARIABLES_ADMIN|G
-|root||batch||TABLE_ENCRYPTION_ADMIN|G
 |root||debian-sys-maint|localhost|TABLE_ENCRYPTION_ADMIN|G
 |root||maie421||TABLE_ENCRYPTION_ADMIN|G
 |root||root|localhost|TABLE_ENCRYPTION_ADMIN|G
-|root||batch||TELEMETRY_LOG_ADMIN|G
 |root||debian-sys-maint|localhost|TELEMETRY_LOG_ADMIN|G
 |root||maie421||TELEMETRY_LOG_ADMIN|G
 |root||root|localhost|TELEMETRY_LOG_ADMIN|G
-|root||batch||TRIGGER|G
 |root||debian-sys-maint|localhost|TRIGGER|G
 |root||maie421||TRIGGER|G
 |root||root|localhost|TRIGGER|G
-|root||batch||UPDATE|G
 |root||debian-sys-maint|localhost|UPDATE|G
 |root||maie421||UPDATE|G
 |root||root|localhost|UPDATE|G
-|root||batch||XA_RECOVER_ADMIN|G
 |root||debian-sys-maint|localhost|XA_RECOVER_ADMIN|G
 |root||maie421||XA_RECOVER_ADMIN|G
 |root||root|localhost|XA_RECOVER_ADMIN|G
@@ -1222,13 +1156,13 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="292" parent="1" name="log">
-      <IntrospectionTimestamp>2023-12-09.00:00:10</IntrospectionTimestamp>
-      <LocalIntrospectionTimestamp>2023-12-08.06:00:10</LocalIntrospectionTimestamp>
+      <IntrospectionTimestamp>2023-12-08.00:05:24</IntrospectionTimestamp>
+      <LocalIntrospectionTimestamp>2023-12-07.06:05:24</LocalIntrospectionTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="293" parent="1" name="track_price_changes">
-      <IntrospectionTimestamp>2023-12-10.22:54:41</IntrospectionTimestamp>
-      <LocalIntrospectionTimestamp>2023-12-10.04:54:41</LocalIntrospectionTimestamp>
+    <schema id="293" parent="1" name="track-price-changes">
+      <IntrospectionTimestamp>2023-12-08.00:05:24</IntrospectionTimestamp>
+      <LocalIntrospectionTimestamp>2023-12-07.06:05:24</LocalIntrospectionTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <user id="294" parent="1" name="batch">
@@ -1273,7 +1207,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_unicode_ci</CollationName>
     </table>
-    <table id="304" parent="293" name="products_stats">
+    <table id="304" parent="293" name="stats">
       <Comment>상품 가격 통계</Comment>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_unicode_ci</CollationName>
@@ -1339,7 +1273,7 @@ created_at</ColNames>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="315" parent="303" name="id">
-      <AutoIncrement>10289</AutoIncrement>
+      <AutoIncrement>1</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -1369,115 +1303,92 @@ created_at</ColNames>
       <Position>5</Position>
     </column>
     <column id="320" parent="303" name="price">
-      <Comment>현재 상품 가격</Comment>
+      <Comment>상품 가격</Comment>
       <DasType>int|0s</DasType>
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="321" parent="303" name="avg_price">
-      <Comment>평균 가격</Comment>
-      <DasType>float|0s</DasType>
+    <column id="321" parent="303" name="created_at">
+      <DasType>timestamp|0s</DasType>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <column id="322" parent="303" name="created_at">
+    <column id="322" parent="303" name="updated_at">
       <DasType>timestamp|0s</DasType>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
-      <NotNull>1</NotNull>
       <Position>8</Position>
     </column>
-    <column id="323" parent="303" name="updated_at">
-      <DasType>timestamp|0s</DasType>
-      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
-      <OnUpdate>CURRENT_TIMESTAMP</OnUpdate>
-      <Position>9</Position>
-    </column>
-    <index id="324" parent="303" name="PRIMARY">
+    <index id="323" parent="303" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="325" parent="303" name="products_pk">
-      <ColNames>product_id</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <index id="326" parent="303" name="product_index">
+    <index id="324" parent="303" name="product_index">
       <ColNames>category_id
-product_id
-updated_at</ColNames>
-      <ReverseColNames>updated_at</ReverseColNames>
+product_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="327" parent="303" name="PRIMARY">
+    <key id="325" parent="303" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <key id="328" parent="303" name="products_pk">
-      <UnderlyingIndexName>products_pk</UnderlyingIndexName>
-    </key>
-    <column id="329" parent="304" name="id">
-      <AutoIncrement>1368</AutoIncrement>
+    <column id="326" parent="304" name="id">
+      <AutoIncrement>1</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="330" parent="304" name="product_id">
+    <column id="327" parent="304" name="product_id">
       <Comment>상품 id</Comment>
       <DasType>bigint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="331" parent="304" name="high_price">
+    <column id="328" parent="304" name="high_price">
       <Comment>최고가 가격</Comment>
       <DasType>int|0s</DasType>
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="332" parent="304" name="low_price">
+    <column id="329" parent="304" name="low_price">
       <Comment>최저가 가격</Comment>
       <DasType>int|0s</DasType>
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="333" parent="304" name="avg_price">
+    <column id="330" parent="304" name="age_price">
       <Comment>평균 가격</Comment>
-      <DasType>float|0s</DasType>
+      <DasType>int|0s</DasType>
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="334" parent="304" name="created_at">
+    <column id="331" parent="304" name="created_at">
       <DasType>timestamp|0s</DasType>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="335" parent="304" name="updated_at">
+    <column id="332" parent="304" name="updated_at">
       <DasType>timestamp|0s</DasType>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
-      <OnUpdate>CURRENT_TIMESTAMP</OnUpdate>
       <Position>7</Position>
     </column>
-    <index id="336" parent="304" name="PRIMARY">
+    <index id="333" parent="304" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="337" parent="304" name="product_detail">
+    <index id="334" parent="304" name="product_detail">
       <ColNames>product_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="338" parent="304" name="products_stats_create">
-      <ColNames>created_at</ColNames>
-      <ReverseColNames>created_at</ReverseColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="339" parent="304" name="PRIMARY">
+    <key id="335" parent="304" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
