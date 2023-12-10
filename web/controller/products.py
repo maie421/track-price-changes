@@ -19,23 +19,34 @@ class Products:
 
             df['discount_rate'] = (df.avg_price - df.price) / df.avg_price * 100
 
-            # # Retrieve the top 12 products based on the discount rate
             top_12_discounted = df.nlargest(12, 'discount_rate')
-            # print(top_12_discounted)
-            #
-            # # Display the result
-            # print(top_12_discounted[['product_id', 'price', 'avg_price', 'discount_rate']])
+
             print(top_12_discounted)
             return render_template('index.html', products=top_12_discounted.to_dict('records'))
         except Exception as e:
             print(f"Error executing SELECT statement: {e}")
-            # You might want to log the exception or handle it appropriately
-            # For now, returning a simple error response
-            # return render_template('error.html', error_message=str(e))
         finally:
             if hasattr(cursor, 'closed') and not cursor.closed:
                 cursor.close()
 
 
-    def getProduct(self):
-        return render_template('product.html')
+    def getProduct(self, pid):
+        cursor = self.db_conn.cursor()
+        cursor.execute("SELECT product_id, image, name, price, avg_price FROM track_price_changes.products where product_id = %s", pid)
+        product_data = cursor.fetchone()
+
+        discount_rate = (product_data[4] - product_data[3]) / product_data[4] * 100
+
+        cursor.execute("SELECT max(high_price) as high_price, min(low_price) as low_price FROM track_price_changes.products_stats WHERE product_id = %s", pid)
+        product_price_data = cursor.fetchone()
+
+        return render_template('product.html', product={
+            'product_id': product_data[0],
+            'image': product_data[1],
+            'name': product_data[2],
+            'price': product_data[3],
+            'avg_price': product_data[4],
+            'high_price': product_price_data[0],
+            'low_price': product_price_data[1],
+            'discount_rate': discount_rate,
+        })

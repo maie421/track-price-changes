@@ -1,5 +1,5 @@
 import sys
-from flask import Flask
+from flask import Flask, request
 from controller.products import Products
 # Flask 객체 인스턴스 생성
 app = Flask(__name__)
@@ -12,7 +12,7 @@ def index():
 
 @app.route('/product')
 def getProduct():
-    return product.getProduct()
+    return product.getProduct(request.args.get('pid'))
 
 if __name__ == "__main__":
     app.run()
