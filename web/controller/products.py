@@ -52,7 +52,24 @@ class Products:
 
         cursor.execute("SELECT high_price,low_price, created_at FROM track_price_changes.products_stats WHERE created_at >= %s AND created_at <= %s and product_id = %s", (start_date, end_date, pid))
         product_stats_data = cursor.fetchall()
-        df = pd.DataFrame(product_stats_data, columns=['high_price', 'low_price', 'created_at'])
+
+        date_to_index = [row[2].strftime("%Y-%m-%d") for row in product_stats_data]
+        print(date_to_index)
+        labels = [(datetime.now() - timedelta(days=i)).strftime("%Y-%m-%d") for i in range(6, -1, -1)]
+        print(labels)
+        not_in_labels = []
+        for label in labels:
+            if label not in date_to_index:
+                not_in_labels.append(labels.index(label))
+
+        high_price = [row[0] for row in product_stats_data]
+        low_price = [row[1] for row in product_stats_data]
+
+        print(not_in_labels)
+        for i in not_in_labels:
+            high_price.insert(i, "")
+            low_price.insert(i, "")
+
         cursor.close()
 
         return render_template('product.html', product={
@@ -65,7 +82,11 @@ class Products:
             'low_price': product_price_data[1],
             'discount_rate': discount_rate,
             'increase_rate': increase_rate,
-        }, product_stats={df.to_dict('records')})
+        }, product_stats={
+            'labels': labels,
+            'high_price': high_price,
+            'low_price': low_price
+        })
 
     def getCategory(self, category_id, paging):
         per_page = 24
