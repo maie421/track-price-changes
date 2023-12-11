@@ -12,14 +12,14 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <li class="nav-item"><a class="nav-link active" href="/category?cat=502383&page=1">국/탕/전골</a></li>
-                <li class="nav-item"><a class="nav-link" href="/category?cat=502384&page=1">덮밥/비빔밥</a></li>
-                <li class="nav-item"><a class="nav-link" href="/category?cat=502385&page=1">스테이크/고기</a></li>
-                <li class="nav-item"><a class="nav-link" href="/category?cat=502386&page=1">면/파스타/감바스</a></li>
-                <li class="nav-item"><a class="nav-link" href="/category?cat=502387&page=1">분식</a></li>
-                <li class="nav-item"><a class="nav-link" href="/category?cat=502389&page=1">어린이 만들기 겸용</a></li>
-                <li class="nav-item"><a class="nav-link" href="/category?cat=502390&page=1">중식요리</a></li>
-                <li class="nav-item"><a class="nav-link" href="/category?cat=502391&page=1">기타요리</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.args.get('cat') == '502383' %}active{% endif %}" href="/category?cat=502383&page=1">국/탕/전골</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.args.get('cat') == '502384' %}active{% endif %}" href="/category?cat=502384&page=1">덮밥/비빔밥</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.args.get('cat') == '502385' %}active{% endif %}" href="/category?cat=502385&page=1">스테이크/고기</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.args.get('cat') == '502386' %}active{% endif %}" href="/category?cat=502386&page=1">면/파스타/감바스</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.args.get('cat') == '502387' %}active{% endif %}" href="/category?cat=502387&page=1">분식</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.args.get('cat') == '502389' %}active{% endif %}" href="/category?cat=502389&page=1">어린이 만들기 겸용</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.args.get('cat') == '502390' %}active{% endif %}" href="/category?cat=502390&page=1">중식요리</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.args.get('cat') == '502391' %}active{% endif %}" href="/category?cat=502391&page=1">기타요리</a></li>
             </ul>
         </div>
     </div>
