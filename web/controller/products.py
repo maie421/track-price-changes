@@ -38,6 +38,7 @@ class Products:
         product_data = cursor.fetchone()
 
         discount_rate = (product_data[4] - product_data[3]) / product_data[4] * 100
+        increase_rate = (product_data[3] - product_data[4]) / product_data[4] * 100
 
         cursor.execute("SELECT max(high_price) as high_price, min(low_price) as low_price FROM track_price_changes.products_stats WHERE product_id = %s", pid)
         product_price_data = cursor.fetchone()
@@ -52,6 +53,7 @@ class Products:
             'high_price': product_price_data[0],
             'low_price': product_price_data[1],
             'discount_rate': discount_rate,
+            'increase_rate': increase_rate,
         })
 
     def getCategory(self, category_id, paging):
@@ -67,6 +69,7 @@ class Products:
         df = pd.DataFrame(data, columns=['product_id', 'image', 'name', 'price', 'avg_price'])
 
         df['discount_rate'] = (df.avg_price - df.price) / df.avg_price * 100
+        df['increase_rate'] = (df.price - df.avg_price) / df.avg_price * 100
 
         query = "SELECT count(*) FROM track_price_changes.products where category_id = %s"
         cursor.execute(query, category_id)

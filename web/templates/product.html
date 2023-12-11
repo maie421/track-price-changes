@@ -13,11 +13,16 @@
 <!--                        <div class="small mb-1">SKU: BST-498</div>-->
                         <h1 class="display-6 fw-bolder">{{ product.name }}</h1>
                         <div class="fs-5 mb-5">
+                            {% if product.discount_rate|float > 0 %}
                             <span class="discount-box mx-2 fs-5" style="background-color: red;">
-                                {% if product.discount_rate|float > 0 %}
-                                    ▼ {{ product.discount_rate|round(method='ceil')|int }}%
-                                {% endif %}
+                                ▼ {{ product.discount_rate|round(method='ceil')|int }}%
                             </span>
+                            {% endif %}
+                            {% if product.increase_rate|float > 0 %}
+                            <span class="discount-box mx-2 fs-5" style="background-color: #14AF40;">
+                               ▲ {{ product.increase_rate|round(method='ceil')|int }}%
+                            </span>
+                            {% endif %}
                             <span style="float: right">현재가 {{ product.price }}원</span>
                         </div>
                         <div class="col mb-5">

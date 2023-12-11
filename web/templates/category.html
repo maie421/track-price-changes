@@ -20,11 +20,16 @@
                                         <!-- Product name-->
                                         <h5 class="fw-bolder two-line-text">{{product.name}}</h5>
                                         <!-- Product price-->
+                                        {% if product.discount_rate|float > 0 %}
                                         <span class="discount-box mx-2" style="background-color: red;">
-                                            {% if product.discount_rate|float > 0 %}
-                                                ▼ {{ product.discount_rate|round(method='ceil')|int }}%
-                                            {% endif %}
+                                           ▼ {{ product.discount_rate|round(method='ceil')|int }}%
                                         </span>
+                                        {% endif %}
+                                        {% if product.increase_rate|float > 0 %}
+                                        <span class="discount-box mx-2" style="background-color: #14AF40;">
+                                           ▲ {{ product.increase_rate|round(method='ceil')|int }}%
+                                        </span>
+                                        {% endif %}
                                         {{product.price}}원
                                     </div>
                                 </div>
