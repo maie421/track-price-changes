@@ -15,7 +15,7 @@
                         <div class="fs-5 mb-5">
                             <span class="discount-box mx-2 fs-5" style="background-color: red;">
                                 {% if product.discount_rate|float > 0 %}
-                                    ▼ {{ product.discount_rate|int }}%
+                                    ▼ {{ product.discount_rate|round(method='ceil')|int }}%
                                 {% endif %}
                             </span>
                             <span style="float: right">현재가 {{ product.price }}원</span>

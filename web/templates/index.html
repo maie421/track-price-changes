@@ -30,7 +30,7 @@
                                         <!-- Product price-->
                                         <span class="discount-box mx-2" style="background-color: red;">
                                             {% if product.discount_rate|float > 0 %}
-                                                ▼ {{ product.discount_rate|int }}%
+                                                ▼ {{ product.discount_rate|round(method='ceil')|int }}%
                                             {% endif %}
                                         </span>
                                         {{product.price}}원

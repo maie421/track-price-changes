@@ -17,7 +17,7 @@ class Products:
             cursor = self.db_conn.cursor()
             cursor.execute("SELECT product_id, image, name, price, avg_price FROM track_price_changes.products;")
             data = cursor.fetchall()
-            df = pd.DataFrame(data, columns=['product_id','image','name', 'price', 'avg_price'])
+            df = pd.DataFrame(data, columns=['product_id', 'image', 'name', 'price', 'avg_price'])
 
             df['discount_rate'] = (df.avg_price - df.price) / df.avg_price * 100
 
