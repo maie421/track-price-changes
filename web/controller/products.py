@@ -1,4 +1,5 @@
 import math
+from datetime import datetime, timedelta
 
 import pandas as pd
 from flask import render_template
@@ -23,7 +24,6 @@ class Products:
 
             top_12_discounted = df.nlargest(12, 'discount_rate')
 
-            print(top_12_discounted)
             return render_template('index.html', products=top_12_discounted.to_dict('records'))
         except Exception as e:
             print(f"Error executing SELECT statement: {e}")
@@ -33,6 +33,13 @@ class Products:
 
 
     def getProduct(self, pid):
+        now_date = datetime.now()
+        current_date = now_date.strftime("%Y-%m-%d")
+
+        start_date_format = (now_date - timedelta(days=7)).strftime("%Y-%m-%d")
+        start_date = f"{start_date_format} 00:00:00"
+        end_date = f"{current_date} 23:59:59"
+
         cursor = self.db_conn.cursor()
         cursor.execute("SELECT product_id, image, name, price, avg_price FROM track_price_changes.products where product_id = %s", pid)
         product_data = cursor.fetchone()
@@ -42,6 +49,10 @@ class Products:
 
         cursor.execute("SELECT max(high_price) as high_price, min(low_price) as low_price FROM track_price_changes.products_stats WHERE product_id = %s", pid)
         product_price_data = cursor.fetchone()
+
+        cursor.execute("SELECT high_price,low_price, created_at FROM track_price_changes.products_stats WHERE created_at >= %s AND created_at <= %s and product_id = %s", (start_date, end_date, pid))
+        product_stats_data = cursor.fetchall()
+        df = pd.DataFrame(product_stats_data, columns=['high_price', 'low_price', 'created_at'])
         cursor.close()
 
         return render_template('product.html', product={
@@ -54,7 +65,7 @@ class Products:
             'low_price': product_price_data[1],
             'discount_rate': discount_rate,
             'increase_rate': increase_rate,
-        })
+        }, product_stats={df.to_dict('records')})
 
     def getCategory(self, category_id, paging):
         per_page = 24
@@ -63,7 +74,7 @@ class Products:
 
         cursor = self.db_conn.cursor()
         category_select_sql = f"SELECT product_id, image, name, price, avg_price FROM track_price_changes.products where category_id = %s limit {per_page} offset {start}"
-        print(category_select_sql)
+
         cursor.execute(category_select_sql, category_id)
         data = cursor.fetchall()
         df = pd.DataFrame(data, columns=['product_id', 'image', 'name', 'price', 'avg_price'])
