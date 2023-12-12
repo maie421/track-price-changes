@@ -3,8 +3,8 @@ FROM python:3.9-alpine
 COPY web/requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
-COPY web/cert.pem .
-COPY web/key.pem .
+COPY web/cert.crt .
+COPY web/key.key .
 
 COPY web /app
 
