@@ -4,18 +4,10 @@
     <body>
         <!-- Navigation-->
         {% include "common/navigation.html" %}
-        <header class="py-5" style="background-color: forestgreen">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">쿠팡 로켓프레시 밀키트 제품<br> 가격을 추적해서 알려드려요 </h1>
-                    <p class="lead fw-normal text-white-50 mb-0">가격이 떨어진 제품을 알려드려요!</p>
-                </div>
-            </div>
-        </header>
         {% include "common/search.html" %}
         <section>
             <div class="container px-4 px-lg-5">
-                <h2 class="fw-bolder mb-4">할인율이 높은 상품</h2>
+                <h4 class="fw-bolder mb-4">'{{request.args.get('keyword')}}'에 대한 {{page.total_count}}개의 검색결과</h4>
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     {% for product in products %}
                     <div class="col mb-5">
@@ -29,11 +21,16 @@
                                         <!-- Product name-->
                                         <h5 class="fw-bolder two-line-text">{{product.name}}</h5>
                                         <!-- Product price-->
-                                        <span class="discount-box mx-2" style="background-color: red;">
-                                            {% if product.discount_rate|float > 0 %}
-                                                ▼ {{ product.discount_rate|round(method='ceil')|int }}%
-                                            {% endif %}
-                                        </span>
+                                        {% if product.discount_rate|float > 0 %}
+                                            <span class="discount-box mx-2" style="background-color: red;">
+                                               ▼ {{ product.discount_rate|round(method='ceil')|int }}%
+                                            </span>
+                                        {% endif %}
+                                        {% if product.increase_rate|float > 0 %}
+                                            <span class="discount-box mx-2" style="background-color: #14AF40;">
+                                               ▲ {{ product.increase_rate|round(method='ceil')|int }}%
+                                            </span>
+                                        {% endif %}
                                         {{product.price}}원
                                     </div>
                                 </div>
@@ -42,6 +39,15 @@
                     </div>
                     {% endfor %}
                 </div>
+                {% if page.size >= 2 %}
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            {% for page_num in range(1, page.size + 1) %}
+                              <li class="page-item"><a class="page-link" href="/search?keyword={{ request.args.get('keyword') }}&page={{ page_num }}">{{ page_num }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                {% endif %}
             </div>
         </section>
         <!-- Footer-->

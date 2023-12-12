@@ -10,13 +10,18 @@ product = Products(app)
 def index():
     return product.index()
 
-@app.route('/product')
+@app.route('/product', methods=['GET'])
 def getProduct():
     return product.getProduct(request.args.get('pid'))
 
 @app.route('/category', methods=['GET'])
 def getCategory():
     return product.getCategory(request.args.get('cat'), int(request.args.get('page')))
+
+@app.route('/search', methods=['GET'])
+def getSearchProduct():
+    print(request.args.get('keyword'))
+    return product.getSearchProduct(request.args.get('keyword'), int(request.args.get('page')))
 
 if __name__ == "__main__":
     app.run()

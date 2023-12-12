@@ -117,3 +117,34 @@ class Products:
                                    'total_count': int(total_count),
                                    'size': math.ceil(page_size)
                                })
+
+    def getSearchProduct(self, keyword, paging):
+        per_page = 24
+
+        start = (paging - 1) * per_page
+
+        cursor = self.db_conn.cursor()
+        category_select_sql = f"SELECT product_id, image, name, price, avg_price FROM track_price_changes.products WHERE name LIKE '%{keyword}%' LIMIT {per_page} OFFSET {start}"
+
+        cursor.execute(category_select_sql)
+        data = cursor.fetchall()
+
+        df = pd.DataFrame(data, columns=['product_id', 'image', 'name', 'price', 'avg_price'])
+
+        df['discount_rate'] = (df.avg_price - df.price) / df.avg_price * 100
+        df['increase_rate'] = (df.price - df.avg_price) / df.avg_price * 100
+
+        query = f"SELECT count(*) FROM track_price_changes.products WHERE name LIKE '%{keyword}%'"
+        cursor.execute(query)
+        result = cursor.fetchone()
+
+        total_count = result[0]
+        page_size = total_count / per_page
+        cursor.close()
+
+        return render_template('search.html',
+                               products=df.to_dict('records'),
+                               page={
+                                   'total_count': int(total_count),
+                                   'size': math.ceil(page_size)
+                               })
