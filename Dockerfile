@@ -10,4 +10,4 @@ COPY web /app
 
 WORKDIR /app
 
-CMD ["python3", "-m", "flask", "run", "--certfile=cert.pem", "--keyfile=key.pem", "--host=0.0.0.0"]
+CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0", "--cert=cert.crt", "--key=key.key"]
