@@ -43,6 +43,12 @@
                 </div>
             </div>
         </section>
+        {% include "common/notice.html" %}
+        <nav class="navbar navbar-light fixed-bottom bg-light">
+            <div style="width:100%;">
+                <a class="btn btn-outline-success" style="font-size:20px;width:100%;" role="button" target="_blank" href="https://www.coupang.com/vp/products/{{ product.product_id }}">쿠팡사러가기</a>
+            </div>
+        </nav>
         <!-- Footer-->
         {% include "common/footer.html" %}
     </body>
@@ -59,15 +65,15 @@ var data = {
     datasets: [
         {
             label: '최저가',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(139, 0, 0)',
+            borderColor: 'rgba(139, 0, 0)',
             data: JSON.parse(lowPrice),
             fill: false,
         },
         {
             label: '최고가',
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: 'rgba(34, 139, 34)',
+            borderColor: 'rgba(34, 139, 34)',
             data: JSON.parse(highPrice),
             fill: false,
         }
