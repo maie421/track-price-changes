@@ -21,7 +21,6 @@ def getCategory():
 
 @app.route('/search', methods=['GET'])
 def getSearchProduct():
-    print(request.args.get('keyword'))
     return product.getSearchProduct(request.args.get('keyword'), int(request.args.get('page')))
 
 if __name__ == "__main__":
