@@ -12,8 +12,14 @@
                 </div>
             </div>
         </header>
-        <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
+        <section>
+            <div class="search px-4 px-lg-5 my-5 container d-flex">
+                <input type="text" placeholder="상품을 검색해 보세요">
+                <a class="btn" href="#">검색</a>
+            </div>
+        </section>
+        <section>
+            <div class="container px-4 px-lg-5">
                 <h2 class="fw-bolder mb-4">할인율이 높은 상품</h2>
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     {% for product in products %}

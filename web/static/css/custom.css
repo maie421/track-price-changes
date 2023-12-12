@@ -28,3 +28,22 @@
 /*  -ms-user-select:none;*/
 /*  user-select:none*/
 /*}*/
+.search {
+  position: relative;
+}
+
+.search input {
+  width: 90%;
+  border: 3px solid darkolivegreen;
+  border-radius: 8px 0 0 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+.search a {
+  width: 10%;
+  background-color: darkolivegreen;
+  border-radius: 0 8px 8px 0;
+  padding: 10px 12px;
+  color: white;
+  font-size: 14px;
+}
