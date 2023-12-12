@@ -14,4 +14,4 @@ RUN openssl req -new -newkey rsa:4096 -x509 -nodes -out cert.pem -keyout key.pem
 
 EXPOSE 5000
 
-CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0", "--cert=cert.pem", "--key=key.pem"]
+CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0"]
