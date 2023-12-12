@@ -43,7 +43,11 @@
   width: 10%;
   background-color: darkolivegreen;
   border-radius: 0 8px 8px 0;
-  padding: 10px 12px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: white;
   font-size: 14px;
+  text-decoration: none; /* Remove underline */
 }
