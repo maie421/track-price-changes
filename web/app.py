@@ -24,6 +24,5 @@ def getSearchProduct():
     return product.getSearchProduct(request.args.get('keyword'), int(request.args.get('page')))
 
 if __name__ == "__main__":
-    context = ('cert.crt', 'key.key')
     # app.run(ssl_context=context, debug=True)
-    app.run(ssl_context=context)
+    app.run()
