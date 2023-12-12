@@ -36,4 +36,4 @@ jobs:
             docker pull  ${{ secrets.DOCKER_USERNAME }}/track-price-changes-app:latest
             docker stop track-price-changes-container || true
             docker rm track-price-changes-container || true
-            docker run -d --name track-price-changes-container -p 172.17.0.2:80:5000 ${{ secrets.DOCKER_USERNAME }}/track-price-changes-app:latest
+            docker run -d --name track-price-changes-container -p 0.0.0.0:80:5000 ${{ secrets.DOCKER_USERNAME }}/track-price-changes-app:latest
