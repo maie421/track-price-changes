@@ -59,8 +59,6 @@ var highPrice = '{{ product_stats.high_price | tojson | safe}}'
 var lowPrice = '{{ product_stats.low_price | tojson | safe}}'
 var label = '{{ product_stats.labels | tojson | safe}}'
 
-console.log(highPrice);
-
 var data = {
     labels: JSON.parse(label),
     datasets: [
