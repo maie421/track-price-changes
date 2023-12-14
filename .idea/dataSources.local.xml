@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="dataSourceStorageLocal" created-in="DB-232.10203.8">
+  <component name="dataSourceStorageLocal" created-in="PY-233.11799.259">
     <data-source name="track-price-changes" uuid="ace19412-5c9c-4f8f-921a-a93881a8bc3a">
       <database-info product="MySQL" version="8.0.35-0ubuntu0.22.04.1" jdbc-version="4.2" driver-name="MariaDB Connector/J" driver-version="2.7.3" dbms="MYSQL" exact-version="8.0.35" exact-driver-version="2.7">
         <extra-name-characters>#@</extra-name-characters>
