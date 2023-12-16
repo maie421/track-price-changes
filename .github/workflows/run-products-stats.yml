@@ -1,10 +1,10 @@
 name: 상품 통계 배치
 
 on:
-  workflow_run:
-    workflows: ["크롤링 배치"]
-    types:
-      - completed
+#  workflow_run:
+#    workflows: ["크롤링 배치"]
+#    types:
+#      - completed
   workflow_dispatch:
 
 jobs:
