@@ -1,6 +1,6 @@
 import ssl
 import sys
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from controller.products import Products
 # Flask 객체 인스턴스 생성
 app = Flask(__name__)
@@ -22,6 +22,10 @@ def getCategory():
 @app.route('/search', methods=['GET'])
 def getSearchProduct():
     return product.getSearchProduct(request.args.get('keyword'), int(request.args.get('page')))
+
+@app.route("/product/similar", methods=['GET'])
+def getSimilarProducts():
+    return product.getSimilarProducts(request.args.get('pid')), 200
 
 if __name__ == "__main__":
     # app.run(ssl_context=context, debug=True)

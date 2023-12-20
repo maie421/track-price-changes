@@ -2,7 +2,7 @@ import math
 from datetime import datetime, timedelta
 
 import pandas as pd
-from flask import render_template
+from flask import render_template, jsonify
 
 from controller.similarity import compare_images
 from testDbConnect import db_connect_test
@@ -82,36 +82,6 @@ class Products:
             high_price.insert(i, "")
             low_price.insert(i, "")
 
-        # 유사 상품
-        cursor.execute(
-            "SELECT product_id, image, name, price, avg_price, category_id FROM track_price_changes.products WHERE category_id = %s",
-            (product_data[5]))
-        _product_category_data = cursor.fetchall()
-
-        specific_image = f'https:{product_data[1]}'
-
-        similarity_scores = {}
-
-        for product_category_data in _product_category_data:
-            image_path = f'https:{product_category_data[1]}'
-            product_id = product_category_data[0]
-
-            similarity_score = compare_images(specific_image, image_path)
-            if similarity_score >= 0.7 and product_id != pid:
-                similarity_scores[product_id] = similarity_score
-
-            if len(similarity_scores) >= 3:
-                print("끝남")
-                break
-        # for pair in itertools.combinations(image_paths.items(), 2):
-        #     counter += 1
-        #     (key1, path1), (key2, path2) = pair
-        #     similarity_score = compare_images(path1, path2)
-        #     similarity_scores[(key1, key2)] = similarity_score
-        #     print(similarity_scores)
-        #     break
-
-
         return render_template('product.html', product={
             'product_id': product_data[0],
             'image': product_data[1],
@@ -128,7 +98,47 @@ class Products:
             'low_price': low_price
         })
 
-    # , similarity_data=similarity_data
+
+    def getSimilarProducts(self, pid):
+        cursor = self.db_conn.cursor()
+        cursor.execute(
+            "SELECT product_id, image, name, price, avg_price, category_id FROM track_price_changes.products where product_id = %s",
+            pid)
+        product_data = cursor.fetchone()
+
+        # 유사 상품
+        cursor.execute(
+            "SELECT product_id, image, name, price, avg_price, category_id FROM track_price_changes.products WHERE category_id = %s",
+            (product_data[5]))
+        _product_category_data = cursor.fetchall()
+
+        specific_image = f'https:{product_data[1]}'
+
+        similarity_scores = {}
+
+        for product_category_data in _product_category_data:
+            image_path = f'https:{product_category_data[1]}'
+            product_id = product_category_data[0]
+
+            similarity_score = compare_images(specific_image, image_path)
+
+            if 0.6 <= similarity_score < 1.0:
+                similarity_scores[product_id] = similarity_score
+
+            if len(similarity_scores) >= 3:
+                print("끝남")
+                break
+
+        similarity_data = {}
+        if len(similarity_scores) > 0:
+            keys_only = list(similarity_scores.keys())
+
+            in_clause = ', '.join(['%s'] * len(similarity_scores))
+            sql_query = f"SELECT product_id, image, name, price, avg_price, category_id FROM track_price_changes.products WHERE product_id IN ({in_clause})"
+            cursor.execute(sql_query, keys_only)
+            similarity_data = cursor.fetchall()
+
+        return jsonify(similarity_data)
 
     def getCategory(self, category_id, paging):
         per_page = 24
