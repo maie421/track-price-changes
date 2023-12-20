@@ -20,5 +20,5 @@ def compare_images(image1_path, image2_path):
 
     # 히스토그램 비교
     similarity = cv2.compareHist(hist1, hist2, cv2.HISTCMP_CORREL)
-    print(similarity)
+
     return similarity

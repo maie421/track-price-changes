@@ -83,34 +83,47 @@ class Products:
             low_price.insert(i, "")
 
         # 유사 상품
-        # cursor.execute("SELECT product_id, image, name, price, avg_price, category_id FROM track_price_changes.products WHERE category_id = %s limit 20 offset 30", product_data[5])
-        # _product_category_data = cursor.fetchall()
-        #
-        # image_paths = {}
-        #
-        # for product_category_data in _product_category_data:
-        #     image_paths[f'{product_category_data[0]}'] = f'https:{product_category_data[1]}'
-        #
-        # image_paths['specific_image'] = f'https:{product_data[1]}'
-        #
-        # similarity_scores = {}
-        #
+        cursor.execute(
+            "SELECT product_id, image, name, price, avg_price, category_id FROM track_price_changes.products WHERE category_id = %s",
+            (product_data[5]))
+        _product_category_data = cursor.fetchall()
+
+        image_paths = {}
+
+        for product_category_data in _product_category_data:
+            image_paths[f'{product_category_data[0]}'] = f'https:{product_category_data[1]}'
+
+        specific_image = f'https:{product_data[1]}'
+
+        similarity_scores = {}
+        for product_id, image_path in image_paths.items():
+            # print(f'Product ID: {product_id}, Image Path: {image_path}')
+            similarity_score = compare_images(specific_image, image_path)
+            if similarity_score >= 0.7 and product_id != pid:
+                similarity_scores[product_id] = similarity_score
+
+            if len(similarity_scores) >= 3:
+                print("끝남")
+                break
         # for pair in itertools.combinations(image_paths.items(), 2):
+        #     counter += 1
         #     (key1, path1), (key2, path2) = pair
         #     similarity_score = compare_images(path1, path2)
         #     similarity_scores[(key1, key2)] = similarity_score
-        #
-        # sorted_pairs = sorted(similarity_scores.items(), key=lambda x: x[1], reverse=True)
-        #
-        # selected_pairs = sorted_pairs[:2]
-        #
-        # selected_keys = set(key for pair in selected_pairs for key in pair[0])
-        #
-        # selected_data = [(product_id, image, name, price, avg_price, category_id) for
-        #                  product_id, image, name, price, avg_price, category_id in _product_category_data if
-        #                  f'{product_id}' in selected_keys]
+        #     print(similarity_scores)
+        #     break
 
 
+        # selected_pairs = sorted_scores[:3]
+        print(similarity_scores)
+        keys_only = list(similarity_scores.keys())
+
+        in_clause = ', '.join(['%s'] * len(similarity_scores))
+        sql_query = f"SELECT product_id, image, name, price, avg_price, category_id FROM track_price_changes.products WHERE product_id IN ({in_clause})"
+        cursor.execute(sql_query, keys_only)
+        similarity_data = cursor.fetchall()
+
+        print(keys_only)
         return render_template('product.html', product={
             'product_id': product_data[0],
             'image': product_data[1],
@@ -125,7 +138,9 @@ class Products:
             'labels': labels,
             'high_price': high_price,
             'low_price': low_price
-        })
+        }, similarity_data=similarity_data)
+
+    # , similarity_data = similarity_data
 
     def getCategory(self, category_id, paging):
         per_page = 24
