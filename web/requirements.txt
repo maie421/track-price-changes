@@ -4,3 +4,4 @@ pymysql
 requests
 bs4
 pandas
+opencv-python
