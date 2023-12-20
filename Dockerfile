@@ -1,8 +1,5 @@
 FROM python:3.9-alpine
 
-RUN apt-get update \
- && apt-get install -y tk tcl
-
 RUN pip install --upgrade pip \
  && pip install -e . \
 
