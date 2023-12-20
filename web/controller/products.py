@@ -4,7 +4,11 @@ from datetime import datetime, timedelta
 import pandas as pd
 from flask import render_template
 
+from controller.similarity import compare_images
 from testDbConnect import db_connect_test
+import itertools
+
+
 # from dbConnect import db_connect
 
 
@@ -32,7 +36,6 @@ class Products:
             if hasattr(cursor, 'closed') and not cursor.closed:
                 cursor.close()
 
-
     def getProduct(self, pid):
         now_date = datetime.now()
         current_date = now_date.strftime("%Y-%m-%d")
@@ -42,16 +45,22 @@ class Products:
         end_date = f"{current_date} 23:59:59"
 
         cursor = self.db_conn.cursor()
-        cursor.execute("SELECT product_id, image, name, price, avg_price FROM track_price_changes.products where product_id = %s", pid)
+        cursor.execute(
+            "SELECT product_id, image, name, price, avg_price, category_id FROM track_price_changes.products where product_id = %s",
+            pid)
         product_data = cursor.fetchone()
 
         discount_rate = (product_data[4] - product_data[3]) / product_data[4] * 100
         increase_rate = (product_data[3] - product_data[4]) / product_data[4] * 100
 
-        cursor.execute("SELECT max(high_price) as high_price, min(low_price) as low_price FROM track_price_changes.products_stats WHERE product_id = %s", pid)
+        cursor.execute(
+            "SELECT max(high_price) as high_price, min(low_price) as low_price FROM track_price_changes.products_stats WHERE product_id = %s",
+            pid)
         product_price_data = cursor.fetchone()
 
-        cursor.execute("SELECT high_price, low_price, created_at FROM track_price_changes.products_stats WHERE created_at >= %s AND created_at <= %s and product_id = %s", (start_date, end_date, pid))
+        cursor.execute(
+            "SELECT high_price, low_price, created_at FROM track_price_changes.products_stats WHERE created_at >= %s AND created_at <= %s and product_id = %s",
+            (start_date, end_date, pid))
         product_stats_data = cursor.fetchall()
 
         # 크롤링된 데이터 날짜
@@ -73,7 +82,34 @@ class Products:
             high_price.insert(i, "")
             low_price.insert(i, "")
 
-        cursor.close()
+        # 유사 상품
+        # cursor.execute("SELECT product_id, image, name, price, avg_price, category_id FROM track_price_changes.products WHERE category_id = %s limit 20 offset 30", product_data[5])
+        # _product_category_data = cursor.fetchall()
+        #
+        # image_paths = {}
+        #
+        # for product_category_data in _product_category_data:
+        #     image_paths[f'{product_category_data[0]}'] = f'https:{product_category_data[1]}'
+        #
+        # image_paths['specific_image'] = f'https:{product_data[1]}'
+        #
+        # similarity_scores = {}
+        #
+        # for pair in itertools.combinations(image_paths.items(), 2):
+        #     (key1, path1), (key2, path2) = pair
+        #     similarity_score = compare_images(path1, path2)
+        #     similarity_scores[(key1, key2)] = similarity_score
+        #
+        # sorted_pairs = sorted(similarity_scores.items(), key=lambda x: x[1], reverse=True)
+        #
+        # selected_pairs = sorted_pairs[:2]
+        #
+        # selected_keys = set(key for pair in selected_pairs for key in pair[0])
+        #
+        # selected_data = [(product_id, image, name, price, avg_price, category_id) for
+        #                  product_id, image, name, price, avg_price, category_id in _product_category_data if
+        #                  f'{product_id}' in selected_keys]
+
 
         return render_template('product.html', product={
             'product_id': product_data[0],

@@ -43,6 +43,27 @@
                 </div>
             </div>
         </section>
+        <!-- Related items section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5">
+                <h2 class="fw-bolder mb-4">이 상품과 비슷한 상품</h2>
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    {% for data in selected_data %}
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <img class="card-img-top" src="{{ data[1] }}" alt="{{ data[2] }}" />
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder">{{ data[2] }}</h5>
+                                    {{ data[3] }}원
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
         {% include "common/notice.html" %}
         <nav class="navbar navbar-light fixed-bottom bg-light">
             <div style="width:100%;">

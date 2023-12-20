@@ -33,12 +33,11 @@ cur = conn.cursor()
 # 502489 : "어린이 만들기 겸용"
 # 502490 : "중식요리"
 # 502491 : "기타요리"
-original_numbers = {502483, 502484, 502485, 502486, 502487, 502489, 502490, 502491}
+category_numbers = {502483, 502484, 502485, 502486, 502487, 502489, 502490, 502491}
 # original_numbers = {502483}
 
-modified_numbers = {str(num)[:3] + '3' + str(num)[4:] for num in original_numbers}
+modified_numbers = {str(num)[:3] + '3' + str(num)[4:] for num in category_numbers}
 
-current_date = datetime.now().strftime("%Y-%m-%d")
 now_date = datetime.now()
 current_date = now_date.strftime("%Y-%m-%d")
 start_date = f"{current_date} 00:00:00"
