@@ -1,10 +1,8 @@
 FROM python:3.9-alpine
 
-RUN pip install --upgrade pip \
- && pip install -e . \
-
 COPY web/requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+
+RUN pip install --upgrade pip -r requirements.txt
 
 COPY web /app
 
