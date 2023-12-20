@@ -4,4 +4,4 @@ pymysql
 requests
 bs4
 pandas
-opencv-python==3.4.18.65
+opencv-python==4.3.0.38
