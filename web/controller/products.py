@@ -108,8 +108,8 @@ class Products:
 
         # 유사 상품
         cursor.execute(
-            "SELECT product_id, image, name, price, avg_price, category_id FROM track_price_changes.products WHERE category_id = %s",
-            (product_data[5]))
+            "SELECT product_id, image, name, price, avg_price, category_id FROM track_price_changes.products WHERE category_id = %s and  product_id != %s",
+            (product_data[5], pid))
         _product_category_data = cursor.fetchall()
 
         specific_image = f'https:{product_data[1]}'
