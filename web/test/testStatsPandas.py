@@ -1,5 +1,3 @@
-import sys
-import pymysql
 import pandas as pd
 from datetime import datetime, timedelta
 
