@@ -8,7 +8,9 @@
             <input type="text" name="keyword"
                    value="{% if request.args.get('keyword') %}{{ request.args.get('keyword') }}{% endif %}"
                    placeholder="제품을 검색해 보세요" required>
-            <input type="text" name="page" value="1" style="display: none">
+            {% if type != "ai" %}
+                <input type="text" name="page" value="1" style="display: none">
+            {% endif %}
             <button type="submit">검색</button>
         </div>
     </form>
