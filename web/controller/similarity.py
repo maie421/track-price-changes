@@ -1,6 +1,5 @@
 import cv2
 from skimage import io
-print("CV version : ", cv2.__version__)
 def compare_images(image1_path, image2_path):
     # 이미지 불러오기
     image1 = io.imread(image1_path)

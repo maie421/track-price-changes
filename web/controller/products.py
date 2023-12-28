@@ -1,12 +1,14 @@
 import math
 from datetime import datetime, timedelta
-
 import pandas as pd
+from openai import OpenAI
+
 from flask import render_template, jsonify
 
 from controller.similarity import compare_images
 from testDbConnect import db_connect_test
-import itertools
+
+from controller.openAi import search_products
 
 
 # from dbConnect import db_connect
@@ -170,29 +172,78 @@ class Products:
                                    'size': math.ceil(page_size)
                                })
 
-    def getSearchProduct(self, keyword, paging):
+    def getSearchProduct(self, keyword, paging, category):
         per_page = 24
-
-        start = (paging - 1) * per_page
-
         cursor = self.db_conn.cursor()
-        category_select_sql = f"SELECT product_id, image, name, price, avg_price FROM track_price_changes.products WHERE name LIKE '%{keyword}%' LIMIT {per_page} OFFSET {start}"
 
-        cursor.execute(category_select_sql)
-        data = cursor.fetchall()
+        if category == "default":
+            start = (paging - 1) * per_page
+            cursor = self.db_conn.cursor()
+            category_select_sql = f"SELECT product_id, image, name, price, avg_price FROM track_price_changes.products WHERE name LIKE '%{keyword}%' LIMIT {per_page} OFFSET {start}"
 
-        df = pd.DataFrame(data, columns=['product_id', 'image', 'name', 'price', 'avg_price'])
+            cursor.execute(category_select_sql)
+            data = cursor.fetchall()
 
-        df['discount_rate'] = (df.avg_price - df.price) / df.avg_price * 100
-        df['increase_rate'] = (df.price - df.avg_price) / df.avg_price * 100
+            df = pd.DataFrame(data, columns=['product_id', 'image', 'name', 'price', 'avg_price'])
 
-        query = f"SELECT count(*) FROM track_price_changes.products WHERE name LIKE '%{keyword}%'"
-        cursor.execute(query)
-        result = cursor.fetchone()
+            df['discount_rate'] = (df.avg_price - df.price) / df.avg_price * 100
+            df['increase_rate'] = (df.price - df.avg_price) / df.avg_price * 100
 
-        total_count = result[0]
-        page_size = total_count / per_page
-        cursor.close()
+            query = f"SELECT count(*) FROM track_price_changes.products WHERE name LIKE '%{keyword}%'"
+            cursor.execute(query)
+            result = cursor.fetchone()
+
+            total_count = result[0]
+            page_size = total_count / per_page
+            cursor.close()
+        else:
+            product_ids_list = []
+            datafile_path = "file/product_test_embedding.csv"
+
+            df = pd.read_csv(datafile_path)
+
+            client = OpenAI(
+                api_key="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",
+            )
+
+            results = search_products(df, keyword, n=3)
+            for index, row in results.iterrows():
+                try:
+                    name = row['name']
+                    print(name)
+                    model_id = "ft:gpt-3.5-turbo-0613:personal::8aRmYRTt"
+
+                    completion = client.chat.completions.create(
+                        model=model_id,
+                        messages=[
+                            {"role": "system", "content": "You are a friendly woman in your twenties."},
+                            {"role": "user", "content": name}
+                        ]
+                    )
+
+                except Exception as e:
+                    print(f"An error occurred: {e}")
+                    break
+
+                product_id_str = completion.choices[0].message.content
+                print(product_id_str)
+                product_ids_list.append(product_id_str)
+
+                print(product_id_str)
+
+            category_select_sql = f"SELECT product_id, image, name, price, avg_price FROM track_price_changes.products WHERE product_id IN ({', '.join(product_ids_list)})"
+            print(category_select_sql)
+            cursor.execute(category_select_sql)
+            data = cursor.fetchall()
+            print(data)
+            df = pd.DataFrame(data, columns=['product_id', 'image', 'name', 'price', 'avg_price'])
+
+            df['discount_rate'] = (df.avg_price - df.price) / df.avg_price * 100
+            df['increase_rate'] = (df.price - df.avg_price) / df.avg_price * 100
+
+            total_count = 3
+            page_size = total_count / per_page
+            cursor.close()
 
         return render_template('search.html',
                                products=df.to_dict('records'),

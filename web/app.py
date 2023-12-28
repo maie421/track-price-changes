@@ -21,7 +21,7 @@ def getCategory():
 
 @app.route('/search', methods=['GET'])
 def getSearchProduct():
-    return product.getSearchProduct(request.args.get('keyword'), int(request.args.get('page')))
+    return product.getSearchProduct(request.args.get('keyword'), int(request.args.get('page')), request.args.get('category'))
 
 @app.route("/product/similar", methods=['GET'])
 def getSimilarProducts():
