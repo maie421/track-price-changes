@@ -1,10 +1,10 @@
 name: 서비스 배포
 
 on:
-#  push:
-#    paths:
-#      - 'web/**'
-#    branches: ['master']
+  push:
+    paths:
+      - 'web/**'
+    branches: ['master']
   workflow_dispatch:
 
 jobs:
