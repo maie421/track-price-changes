@@ -1,9 +1,9 @@
 <section>
     <form action="/search" method="get">
         <div class="search px-4 px-lg-5 my-5 container d-flex">
-            <select name="category">
-                <option value="default">기본</option>
-                <option value="ai">AI</option>
+            <select name="type">
+                <option value="default"{% if type=="default" %} selected="selected"{% endif %}>기본</option>
+                <option value="ai"{% if type=="ai" %} selected="selected"{% endif %}>AI</option>
             </select>
             <input type="text" name="keyword"
                    value="{% if request.args.get('keyword') %}{{ request.args.get('keyword') }}{% endif %}"

@@ -172,82 +172,82 @@ class Products:
                                    'size': math.ceil(page_size)
                                })
 
-    def getSearchProduct(self, keyword, paging, category):
+    def getDefulatSearchProduct(self, keyword, paging):
         per_page = 24
+        start = (paging - 1) * per_page
         cursor = self.db_conn.cursor()
+        category_select_sql = f"SELECT product_id, image, name, price, avg_price FROM track_price_changes.products WHERE name LIKE '%{keyword}%' LIMIT {per_page} OFFSET {start}"
 
-        if category == "default":
-            start = (paging - 1) * per_page
-            cursor = self.db_conn.cursor()
-            category_select_sql = f"SELECT product_id, image, name, price, avg_price FROM track_price_changes.products WHERE name LIKE '%{keyword}%' LIMIT {per_page} OFFSET {start}"
+        cursor.execute(category_select_sql)
+        data = cursor.fetchall()
 
-            cursor.execute(category_select_sql)
-            data = cursor.fetchall()
+        df = pd.DataFrame(data, columns=['product_id', 'image', 'name', 'price', 'avg_price'])
 
-            df = pd.DataFrame(data, columns=['product_id', 'image', 'name', 'price', 'avg_price'])
+        df['discount_rate'] = (df.avg_price - df.price) / df.avg_price * 100
+        df['increase_rate'] = (df.price - df.avg_price) / df.avg_price * 100
 
-            df['discount_rate'] = (df.avg_price - df.price) / df.avg_price * 100
-            df['increase_rate'] = (df.price - df.avg_price) / df.avg_price * 100
+        query = f"SELECT count(*) FROM track_price_changes.products WHERE name LIKE '%{keyword}%'"
+        cursor.execute(query)
+        result = cursor.fetchone()
 
-            query = f"SELECT count(*) FROM track_price_changes.products WHERE name LIKE '%{keyword}%'"
-            cursor.execute(query)
-            result = cursor.fetchone()
-
-            total_count = result[0]
-            page_size = total_count / per_page
-            cursor.close()
-        else:
-            product_ids_list = []
-            datafile_path = "file/product_test_embedding.csv"
-
-            df = pd.read_csv(datafile_path)
-
-            client = OpenAI(
-                api_key="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",
-            )
-
-            results = search_products(df, keyword, n=3)
-            for index, row in results.iterrows():
-                try:
-                    name = row['name']
-                    print(name)
-                    model_id = "ft:gpt-3.5-turbo-0613:personal::8aRmYRTt"
-
-                    completion = client.chat.completions.create(
-                        model=model_id,
-                        messages=[
-                            {"role": "system", "content": "You are a friendly woman in your twenties."},
-                            {"role": "user", "content": name}
-                        ]
-                    )
-
-                except Exception as e:
-                    print(f"An error occurred: {e}")
-                    break
-
-                product_id_str = completion.choices[0].message.content
-                print(product_id_str)
-                product_ids_list.append(product_id_str)
-
-                print(product_id_str)
-
-            category_select_sql = f"SELECT product_id, image, name, price, avg_price FROM track_price_changes.products WHERE product_id IN ({', '.join(product_ids_list)})"
-            print(category_select_sql)
-            cursor.execute(category_select_sql)
-            data = cursor.fetchall()
-            print(data)
-            df = pd.DataFrame(data, columns=['product_id', 'image', 'name', 'price', 'avg_price'])
-
-            df['discount_rate'] = (df.avg_price - df.price) / df.avg_price * 100
-            df['increase_rate'] = (df.price - df.avg_price) / df.avg_price * 100
-
-            total_count = 3
-            page_size = total_count / per_page
-            cursor.close()
+        total_count = result[0]
+        page_size = total_count / per_page
+        cursor.close()
 
         return render_template('search.html',
                                products=df.to_dict('records'),
                                page={
                                    'total_count': int(total_count),
                                    'size': math.ceil(page_size)
-                               })
+                               },
+                               type="default")
+
+
+
+    def getAiSearchProduct(self, keyword):
+        cursor = self.db_conn.cursor()
+
+        datafile_path = "file/product_test_embedding.csv"
+        product_text = ""
+        name = ""
+
+        df = pd.read_csv(datafile_path)
+        client = OpenAI(
+            api_key="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",
+        )
+
+        results = search_products(df, keyword, n=1)
+        for index, row in results.iterrows():
+            try:
+                name = row['name']
+
+                model_id = "ft:gpt-3.5-turbo-0613:personal::8aZbTg6m"
+                completion = client.chat.completions.create(
+                    model=model_id,
+                    messages=[
+                        {"role": "system", "content": "You are a friendly woman in your twenties."},
+                        {"role": "user", "content": name}
+                    ]
+                )
+
+            except Exception as e:
+                print(f"An error occurred: {e}")
+                break
+
+            product_text = completion.choices[0].message.content
+
+        category_select_sql = f"SELECT product_id, image, name, price, avg_price FROM track_price_changes.products WHERE name = '{name}'"
+        print(category_select_sql)
+        cursor.execute(category_select_sql)
+        data = cursor.fetchall()
+
+        df = pd.DataFrame(data, columns=['product_id', 'image', 'name', 'price', 'avg_price'])
+        print(df)
+        df['discount_rate'] = (df.avg_price - df.price) / df.avg_price * 100
+        df['increase_rate'] = (df.price - df.avg_price) / df.avg_price * 100
+
+
+        return render_template('aiSearch.html',
+                               products=df.to_dict('records'),
+                               text=product_text,
+                               type="ai")
