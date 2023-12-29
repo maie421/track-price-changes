@@ -26,7 +26,7 @@ def get_embedding(text, model="text-embedding-ada-002"):
     return client.embeddings.create(input=[text], model=model).data[0].embedding
 
 
-def search_products(df, product_description, n=3,):
+def search_products(df, product_description, n=3):
     df = df.dropna(subset=['ada_embedding'])
     df['ada_embedding'] = df['ada_embedding'].apply(convert_to_array)
 

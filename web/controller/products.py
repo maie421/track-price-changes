@@ -207,15 +207,16 @@ class Products:
     def getAiSearchProduct(self, keyword):
         cursor = self.db_conn.cursor()
 
+        client = OpenAI(
+            api_key="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",
+        )
+
         datafile_path = "file/product_test_embedding.csv"
         product_text = ""
         name = ""
 
         df = pd.read_csv(datafile_path)
-        client = OpenAI(
-            api_key="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",
-        )
-
+        print(keyword)
         results = search_products(df, keyword, n=1)
         for index, row in results.iterrows():
             try:
@@ -242,7 +243,7 @@ class Products:
         data = cursor.fetchall()
 
         df = pd.DataFrame(data, columns=['product_id', 'image', 'name', 'price', 'avg_price'])
-        print(df)
+
         df['discount_rate'] = (df.avg_price - df.price) / df.avg_price * 100
         df['increase_rate'] = (df.price - df.avg_price) / df.avg_price * 100
 

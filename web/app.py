@@ -24,7 +24,7 @@ def getSearchProduct():
     if request.args.get('type') == 'default':
         return product.getDefulatSearchProduct(request.args.get('keyword'), int(request.args.get('page')))
     else:
-        return product.getAiSearchProduct(request.args.get('type'))
+        return product.getAiSearchProduct(request.args.get('keyword'))
 
 @app.route("/product/similar", methods=['GET'])
 def getSimilarProducts():
