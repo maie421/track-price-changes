@@ -1,47 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
     {% include "common/head.html" %}
+    <link href="/static/css/chat_gpt.css" rel="stylesheet">
     <body>
         <!-- Navigation-->
         {% include "common/navigation.html" %}
-        {% include "common/search.html" %}
         <section>
-            <div class="container px-4 px-lg-5">
-                <div class="card-body p-4">
-                    <div class="text-center">
-                        {{text}}
+            <div class="container px-4 px-lg-5 d-flex justify-content-center">
+                <div id="chat-container">
+                    <div id="chat-messages"></div>
+                    <div id="user-input">
+                        <input type="text" placeholder="메시지를 입력하세요..." />
+                        <button>전송</button>
                     </div>
-                </div>
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    {% for product in products %}
-                    <div class="col mb-5">
-                        <a href="/product?pid={{product.product_id}}">
-                            <div class="card h-100">
-                                <!-- Product image-->
-                                <img class="card-img-top" src="{{ product.image }}" alt="{{ product.name }}" />
-                                <!-- Product details-->
-                                <div class="card-body p-4">
-                                    <div class="text-center">
-                                        <!-- Product name-->
-                                        <h5 class="fw-bolder two-line-text">{{product.name}}</h5>
-                                        <!-- Product price-->
-                                        {% if product.discount_rate|float > 0 %}
-                                            <span class="discount-box mx-2" style="background-color: red;">
-                                               ▼ {{ product.discount_rate|round(method='ceil')|int }}%
-                                            </span>
-                                        {% endif %}
-                                        {% if product.increase_rate|float > 0 %}
-                                            <span class="discount-box mx-2" style="background-color: #14AF40;">
-                                               ▲ {{ product.increase_rate|round(method='ceil')|int }}%
-                                            </span>
-                                        {% endif %}
-                                        {{product.price}}원
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    {% endfor %}
                 </div>
             </div>
         </section>
