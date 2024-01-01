@@ -28,7 +28,7 @@ def getSearchProduct():
 
 @app.route("/product/similar", methods=['GET'])
 def getSimilarProducts():
-    return product.getSimilarProducts(request.args.get('pid')), 200
+    return product.getSimilarProducts(request.args.get('pid'))
 
 if __name__ == "__main__":
     # app.run(ssl_context=context, debug=True)

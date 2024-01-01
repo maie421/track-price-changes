@@ -2,7 +2,6 @@
 <html lang="en">
     {% include "common/head.html" %}
     <body>
-        <!-- Navigation-->
         {% include "common/navigation.html" %}
         {% include "common/search.html" %}
         <section>
@@ -13,14 +12,10 @@
                     <div class="col mb-5">
                         <a href="/product?pid={{product.product_id}}">
                             <div class="card h-100">
-                                <!-- Product image-->
                                 <img class="card-img-top" src="{{ product.image }}" alt="{{ product.name }}" />
-                                <!-- Product details-->
                                 <div class="card-body p-4">
                                     <div class="text-center">
-                                        <!-- Product name-->
                                         <h5 class="fw-bolder two-line-text">{{product.name}}</h5>
-                                        <!-- Product price-->
                                         {% if product.discount_rate|float > 0 %}
                                             <span class="discount-box mx-2" style="background-color: red;">
                                                ▼ {{ product.discount_rate|round(method='ceil')|int }}%
@@ -50,7 +45,6 @@
                 {% endif %}
             </div>
         </section>
-        <!-- Footer-->
         {% include "common/footer.html" %}
     </body>
 </html>
