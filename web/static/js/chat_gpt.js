@@ -65,5 +65,5 @@ userInput.addEventListener('keydown', (event) => {
 
 document.getElementById('open-chat').addEventListener('click', function() {
    var chatContainer = document.getElementById('chat-container');
-   chatContainer.style.display = chatContainer.style.display === 'none' ? 'block' : 'none';
+   chatContainer.style.visibility = chatContainer.style.visibility === 'visible' ? 'hidden' : 'visible';
 });

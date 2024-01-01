@@ -5,10 +5,12 @@
     background-color: #e6e6e6;
 }
 #chat-container {
+    visibility: hidden;
     background-color: white;
     width: 400px;
     height: 600px;
     flex-direction: column;
+    display: flex;
     border: 1px solid #ccc;
     position: fixed;
     bottom: 120px;
@@ -24,7 +26,6 @@
 #user-input {
     display: flex;
     padding: 10px;
-
 }
 #user-input input {
     flex: 1;
