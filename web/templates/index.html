@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     {% include "common/head.html" %}
+    <link href="/static/css/chat_gpt.css" rel="stylesheet">
     <body>
         <!-- Navigation-->
         {% include "common/navigation.html" %}
@@ -42,10 +43,13 @@
                     </div>
                     {% endfor %}
                 </div>
+                {% include "./aiSearch.html" %}
+                <button id="open-chat">Open Chat</button>
             </div>
         </section>
         {% include "common/notice.html" %}
         <!-- Footer-->
         {% include "common/footer.html" %}
     </body>
+    <script src="/static/js/chat_gpt.js"></script>
 </html>

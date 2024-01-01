@@ -1,22 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-    {% include "common/head.html" %}
-    <link href="/static/css/chat_gpt.css" rel="stylesheet">
-    <body>
-        <!-- Navigation-->
-        {% include "common/navigation.html" %}
-        <section>
-            <div class="container px-4 px-lg-5 d-flex justify-content-center">
-                <div id="chat-container">
-                    <div id="chat-messages"></div>
-                    <div id="user-input">
-                        <input type="text" placeholder="메시지를 입력하세요..." />
-                        <button>전송</button>
-                    </div>
-                </div>
+ <section>
+    <div class="container px-4 px-lg-5 d-flex justify-content-center">
+        <div id="chat-container">
+            <div id="chat-messages"></div>
+            <div id="user-input">
+                <input type="text" placeholder="메시지를 입력하세요..." />
+                <button>전송</button>
             </div>
-        </section>
-        <!-- Footer-->
-        {% include "common/footer.html" %}
-    </body>
-</html>
+        </div>
+    </div>
+</section>
