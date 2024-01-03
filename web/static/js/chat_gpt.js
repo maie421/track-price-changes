@@ -30,6 +30,38 @@ function addMessage(content, isUser) {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
+function addProductElement(productData) {
+    let chatMessages = document.getElementById('chat-messages');
+    let newDiv = document.createElement('div');
+    newDiv.className = 'd-flex mb-4';
+    newDiv.style.width = '50px';
+    newDiv.style.marginLeft = '19px';
+
+    let discount_rate = Math.round(productData.discount_rate);
+    let increase_rate = Math.round(productData.increase_rate);
+
+    newDiv.innerHTML = `
+        <div class="col mb-3">
+            <a href="/product?pid=5071428226">
+                <div class="card h-100">
+                    <img class="card-img-top" src="${productData.image}" alt="${productData.name}">
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <h5 class="fw-bolder two-line-text">${productData.name}</h5>
+                            ${discount_rate > 0 ? `<span class="discount-box" style="background-color: red;">▼ ${discount_rate}%</span>` : ''}
+                            ${increase_rate > 0 ? `<span class="discount-box" style="background-color: #14AF40;">▲ ${increase_rate}%</span>` : ''}
+                            ${productData.avg_price}원
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    `;
+
+    chatMessages.insertBefore(newDiv, chatMessages.firstChild);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
 async function fetchAIResponse(prompt) {
     const requestOptions = {
         method: 'POST',
@@ -91,14 +123,13 @@ sendButton.addEventListener('click', async () => {
     const productResponse = await fetchProductResponse(message);
     let productData = productResponse['products']['0'];
     if (productData !== undefined)
-        addMessage(`/product?pid=${productData['product_id']}`, false);
-        console.log(productData);
+        addProductElement(productData);
 });
-userInput.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-        sendButton.click();
-    }
-});
+// userInput.addEventListener('keydown', (event) => {
+//     if (event.key === 'Enter') {
+//         sendButton.click();
+//     }
+// });
 
 document.getElementById('open-chat').addEventListener('click', function() {
    var chatContainer = document.getElementById('chat-container');
