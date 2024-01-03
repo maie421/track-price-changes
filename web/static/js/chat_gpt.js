@@ -42,7 +42,7 @@ function addProductElement(productData) {
 
     newDiv.innerHTML = `
         <div class="col mb-3">
-            <a href="/product?pid=5071428226">
+            <a href="/product?pid=${productData.product_id}">
                 <div class="card h-100">
                     <img class="card-img-top" src="${productData.image}" alt="${productData.name}">
                     <div class="card-body p-4">
@@ -50,7 +50,7 @@ function addProductElement(productData) {
                             <h5 class="fw-bolder two-line-text">${productData.name}</h5>
                             ${discount_rate > 0 ? `<span class="discount-box" style="background-color: red;">▼ ${discount_rate}%</span>` : ''}
                             ${increase_rate > 0 ? `<span class="discount-box" style="background-color: #14AF40;">▲ ${increase_rate}%</span>` : ''}
-                            ${productData.avg_price}원
+                            ${productData.price}원
                         </div>
                     </div>
                 </div>
@@ -103,7 +103,7 @@ async function fetchProductResponse(prompt) {
         },
     };
     try {
-        const response = await fetch(`http://127.0.0.1:5000/v1/search?keyword=${prompt}`, requestOptions);
+        const response = await fetch(`/v1/search?keyword=${prompt}`, requestOptions);
         return await response.json();
     } catch (error) {
         console.error(error)

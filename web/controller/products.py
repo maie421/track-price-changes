@@ -206,11 +206,12 @@ class Products:
         name = ""
 
         df = pd.read_csv(datafile_path)
-        print(keyword)
+
         results = search_products(df, keyword, n=1)
+
         for index, row in results.iterrows():
             try:
-                if row['similarities'] < 0.8:
+                if row['similarities'] < 0.83:
                     return jsonify(products=[])
                 name = row['name']
             except Exception as e:
