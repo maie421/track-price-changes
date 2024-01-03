@@ -1,7 +1,6 @@
 import math
 from datetime import datetime, timedelta
 import pandas as pd
-from openai import OpenAI
 
 from flask import render_template, jsonify
 
@@ -99,7 +98,6 @@ class Products:
             'high_price': high_price,
             'low_price': low_price
         })
-
 
     def getSimilarProducts(self, pid):
         cursor = self.db_conn.cursor()
@@ -200,3 +198,33 @@ class Products:
                                    'total_count': int(total_count),
                                    'size': math.ceil(page_size)
                                })
+
+    def getAiSearchProduct(self, keyword):
+        cursor = self.db_conn.cursor()
+
+        datafile_path = "file/product_test_embedding.csv"
+        name = ""
+
+        df = pd.read_csv(datafile_path)
+        print(keyword)
+        results = search_products(df, keyword, n=1)
+        for index, row in results.iterrows():
+            try:
+                if row['similarities'] < 0.8:
+                    return jsonify(products=[])
+                name = row['name']
+            except Exception as e:
+                print(f"An error occurred: {e}")
+                break
+
+        category_select_sql = f"SELECT product_id, image, name, price, avg_price FROM track_price_changes.products WHERE name = '{name}'"
+
+        cursor.execute(category_select_sql)
+        data = cursor.fetchall()
+
+        df = pd.DataFrame(data, columns=['product_id', 'image', 'name', 'price', 'avg_price'])
+
+        df['discount_rate'] = (df.avg_price - df.price) / df.avg_price * 100
+        df['increase_rate'] = (df.price - df.avg_price) / df.avg_price * 100
+
+        return jsonify(products=df.to_dict('records'))

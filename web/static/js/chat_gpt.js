@@ -63,8 +63,23 @@ async function fetchAIResponse(prompt) {
     }
 }
 
+async function fetchProductResponse(prompt) {
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+    };
+    try {
+        const response = await fetch(`http://127.0.0.1:5000/v1/search?keyword=${prompt}`, requestOptions);
+        return await response.json();
+    } catch (error) {
+        console.error(error)
+        return 'api 상품 오류';
+    }
+}
+
 sendButton.addEventListener('click', async () => {
-    console.log("테스트");
     const message = userInput.value.trim();
     if (message.length === 0) return;
     addMessage(message, true);
@@ -72,10 +87,15 @@ sendButton.addEventListener('click', async () => {
 
     const aiResponse = await fetchAIResponse(message);
     addMessage(aiResponse, false);
+
+    const productResponse = await fetchProductResponse(message);
+    let productData = productResponse['products']['0'];
+    if (productData !== undefined)
+        addMessage(`/product?pid=${productData['product_id']}`, false);
+        console.log(productData);
 });
 userInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
-        console.log("테스트");
         sendButton.click();
     }
 });

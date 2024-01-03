@@ -27,6 +27,10 @@ def getSearchProduct():
 def getSimilarProducts():
     return product.getSimilarProducts(request.args.get('pid'))
 
+@app.route("/v1/search", methods=['GET'])
+def getSimilarProduct():
+    return product.getAiSearchProduct(request.args.get('keyword'))
+
 if __name__ == "__main__":
     # app.run(ssl_context=context, debug=True)
     app.run()
