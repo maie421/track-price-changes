@@ -1,16 +1,10 @@
 <section>
     <form action="/search" method="get">
         <div class="search px-4 px-lg-5 my-5 container d-flex">
-            <select name="type">
-                <option value="default"{% if type=="default" %} selected="selected"{% endif %}>기본</option>
-                <option value="ai"{% if type=="ai" %} selected="selected"{% endif %}>AI</option>
-            </select>
             <input type="text" name="keyword"
                    value="{% if request.args.get('keyword') %}{{ request.args.get('keyword') }}{% endif %}"
                    placeholder="제품을 검색해 보세요" required>
-            {% if type != "ai" %}
-                <input type="text" name="page" value="1" style="display: none">
-            {% endif %}
+            <input type="text" name="page" value="1" style="display: none">
             <button type="submit">검색</button>
         </div>
     </form>
