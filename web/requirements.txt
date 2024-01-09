@@ -7,3 +7,4 @@ pandas
 scikit-image
 opencv-python
 openai
+uwsgi
