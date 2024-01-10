@@ -1,15 +1,15 @@
-version: "3.7"
+version: "3.3"
 name: track-price-changes
 services:
     flask:
-        build: ./web
+        image: maie421/track-price-changes-flask:latest
         container_name: flask
         restart: unless-stopped
         expose:
             - 5000
 
     nginx:
-        build: ./nginx
+        image: maie421/track-price-changes-nginx:latest
         container_name: nginx
         restart: unless-stopped
         ports:
