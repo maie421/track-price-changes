@@ -1,0 +1,16 @@
+version: "3.7"
+name: track-price-changes
+services:
+    flask:
+        build: ./web
+        container_name: flask
+        restart: unless-stopped
+        expose:
+            - 5000
+
+    nginx:
+        build: ./nginx
+        container_name: nginx
+        restart: unless-stopped
+        ports:
+            - "80:80"

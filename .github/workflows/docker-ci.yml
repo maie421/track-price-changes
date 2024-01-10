@@ -2,9 +2,9 @@ name: 서비스 배포
 
 on:
   push:
-    paths:
-      - 'web/**'
-    branches: ['master']
+#    paths:
+#      - 'web/**'
+    branches: ['master', 'nginx']
   workflow_dispatch:
 
 jobs:
@@ -21,9 +21,11 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t track-price-changes-app:latest .
-          docker tag track-price-changes-app ${{ secrets.DOCKER_USERNAME }}/track-price-changes-app:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/track-price-changes-app:latest
+          docker-compose build
+          docker tag track-price-changes-flask ${{ secrets.DOCKER_USERNAME }}/track-price-changes-flask:latest
+          docker tag track-price-changes-nginx ${{ secrets.DOCKER_USERNAME }}/track-price-changes-nginx:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/track-price-changes-flask:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/track-price-changes-nginx:latest
 
       - name: Deploy to track-price-changes
         uses: appleboy/ssh-action@master
@@ -33,7 +35,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            docker pull  ${{ secrets.DOCKER_USERNAME }}/track-price-changes-app:latest
-            docker stop track-price-changes-container || true
-            docker rm track-price-changes-container || true
-            docker run -d --name track-price-changes-container -p 0.0.0.0:80:5000 ${{ secrets.DOCKER_USERNAME }}/track-price-changes-app:latest
+            docker pull ${{ secrets.DOCKER_USERNAME }}/track-price-changes-flask:latest
+            docker pull ${{ secrets.DOCKER_USERNAME }}/track-price-changes-nginx:latest
+            docker-compose -f /home/ubuntu/deploy/docker-compose-dev.yml up -d
