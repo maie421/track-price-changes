@@ -21,7 +21,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker-compose build
+          docker build -t track-price-changes-flask:latest ./web
+          docker build -t track-price-changes-nginx:latest ./nginx
           docker tag track-price-changes-flask ${{ secrets.DOCKER_USERNAME }}/track-price-changes-flask:latest
           docker tag track-price-changes-nginx ${{ secrets.DOCKER_USERNAME }}/track-price-changes-nginx:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/track-price-changes-flask:latest
