@@ -46,5 +46,9 @@ Storage : SSD 25GB<br>
 4. 카테고리별 제품
    
 ### UI
-메인 화면<br>
-<img width="500" alt="image" src="https://github.com/maie421/track-price-changes/assets/35258834/e89e3d2e-e7eb-4f30-95b3-d2977e44a264">
+### 메인 페이지
+<img width="698" alt="image" src="https://github.com/maie421/track-price-changes/assets/35258834/e89e3d2e-e7eb-4f30-95b3-d2977e44a264">
+
+### 상세 페이지
+<img width="698" alt="image" src="https://github.com/maie421/track-price-changes/assets/35258834/3518e7b2-7473-4b15-a894-91c92eb88dd7">
+
