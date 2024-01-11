@@ -19,9 +19,11 @@ http://pricetracker.site/ </br>
 #### 참조 
 - https://mobile.newsis.com/view.html?ar_id=NISX20230106_0002150006#_PA
   
-### 사용 언어
+### 스팩
 - flask <br>
 평균가, 역대최고가, 역대최저가를 계산해야 하기 때문에 통계 라이브러리가 많은 파이썬 언어로 선택을 했고 <br>
 장고, flask , fast api 중 flask 가 웹애플리케이션 개발과 학습 곡선이 낮고 타 프레임워크 보다 가벼워 선택하게 되었습니다. <br>
+- mysql<br>
 
-### 서비스 구조
+### 배포 구조
+<img width="700" alt="image" src="https://github.com/maie421/track-price-changes/assets/35258834/3494ab34-d78d-4002-adf8-375225334158">
