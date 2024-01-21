@@ -62,4 +62,9 @@ Storage : SSD 25GB<br>
 3. 챗봇
   - 대화중 사이트에 해당 상품이 있다면 상품 알려줌
 
+<img width="500" alt="스크린샷 2024-01-21 오후 11 22 21" src="https://github.com/maie421/track-price-changes/assets/35258834/2f672c20-1612-4b7f-aa38-c0bb91084869">
+<img width="500" alt="스크린샷 2024-01-21 오후 11 25 28" src="https://github.com/maie421/track-price-changes/assets/35258834/825198be-e4c6-4997-9399-7e35b9ade833">
+
+
+
 
