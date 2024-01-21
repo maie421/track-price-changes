@@ -6,6 +6,9 @@ http://pricetracker.site/ </br>
 쿠팡 파트너스 활동을 위해 해당 사이트 개발을 진행하였습니다.<br>
 쿠팡 로켓프레시에 있는 상품 가격 변화를 알 수 있도록 하는 것을 목표로 합니다.
 
+## cypress
+https://github.com/maie421/track-price-cypress
+
 ## 프로젝트 기간
 2023.12.02 ~ 2024.01.12
 
@@ -48,8 +51,15 @@ Storage : SSD 25GB<br>
    
 ### UI
 ### 메인 페이지
-<img width="698" alt="image" src="https://github.com/maie421/track-price-changes/assets/35258834/e89e3d2e-e7eb-4f30-95b3-d2977e44a264">
+<img width="600" alt="image" src="https://github.com/maie421/track-price-changes/assets/35258834/e89e3d2e-e7eb-4f30-95b3-d2977e44a264">
 
 ### 상세 페이지
-<img width="698" alt="image" src="https://github.com/maie421/track-price-changes/assets/35258834/3518e7b2-7473-4b15-a894-91c92eb88dd7">
+<img width="600" alt="image" src="https://github.com/maie421/track-price-changes/assets/35258834/3518e7b2-7473-4b15-a894-91c92eb88dd7">
+
+## 2차 프로토타입 배포 
+1. ngnix
+2. 이 상품과 비슷한 상품
+3. 챗봇
+  - 대화중 사이트에 해당 상품이 있다면 상품 알려줌
+
 
