@@ -1,5 +1,4 @@
 # track-price-changes
-http://pricetracker.site/ </br>
 쿠팡 밀키트 가격 변동 추적 사이트
 
 ## 프로젝트 목적
