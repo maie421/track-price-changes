@@ -62,9 +62,18 @@ create index products_stats_create
 create table category
 (
     category_id   bigint primary key not null comment '카테고리 id',
-    category_name bigint not null comment '카테고리 이름',
+    category_name varchar(255) not null comment '카테고리 이름',
     created_at  timestamp default CURRENT_TIMESTAMP not null,
     updated_at  timestamp default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP
 )
     comment '카테고리' collate = utf8mb4_unicode_ci;
 
+insert into track_price_changes.category (category_id, category_name)
+values  (502483, '국/탕/전골'),
+        (502484, '덮밥/비빔밥'),
+        (502485, '스테이크/고기'),
+        (502486, '면/파스타/감바스'),
+        (502487, '분식'),
+        (502489, '어린이 만들기 겸용'),
+        (502490, '중식요리'),
+        (502491, '기타요리');
