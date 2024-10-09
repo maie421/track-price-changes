@@ -2,8 +2,8 @@ create table log.products
 (
     id          int auto_increment
         primary key,
-    market_product_id  bigint                              not null comment '상품 id',
-    market_category_id bigint                              not null comment '카테고리 id',
+    market_product_id  varchar(255)                              not null comment '상품 id',
+    market_category_id varchar(255)                              not null comment '카테고리 id',
     name        varchar(255)                        not null comment '상품 이름',
     image       varchar(255)                        not null comment '상품 이미지',
     price       decimal(10, 2) unsigned             default 0.00  not null comment '현재 상품 가격',
@@ -21,8 +21,8 @@ create table track_price_changes.products
     id          int auto_increment
         primary key,
     product_code       varchar(255)                        not null comment '상품 코드',
-    market_product_id  bigint                              not null comment '마켓 상품 id',
-    market_category_id bigint                              not null comment '마켓 카테고리 id',
+    market_product_id  varchar(255)                              not null comment '마켓 상품 id',
+    market_category_id varchar(255)                              not null comment '마켓 카테고리 id',
     name        varchar(255)                        not null comment '상품 이름',
     image       varchar(255)                        not null comment '상품 이미지',
     price       decimal(10, 2) unsigned             default 0.00                 not null comment '현재 상품 가격',
@@ -43,7 +43,7 @@ create table track_price_changes.products_stats
     id         int auto_increment
         primary key,
     product_code varchar(255)                              not null comment '상품 코드',
-    market_product_id bigint                              not null comment '마켓 상품 id',
+    market_product_id varchar(255)                              not null comment '마켓 상품 id',
     high_price decimal(10, 2) unsigned             default 0.00  not null comment '최고가 가격',
     low_price  decimal(10, 2) unsigned             default 0.00                 not null comment '최저가 가격',
     avg_price  decimal(10, 2) unsigned             default 0.00                 not null comment '평균 가격',
@@ -62,7 +62,7 @@ create index products_stats_create
 create table category
 (
     id         int auto_increment primary key,
-    category_id   bigint not null comment '카테고리 id',
+    category_id   varchar(255) not null comment '카테고리 id',
     category_name varchar(255) not null comment '카테고리 이름',
     created_at  timestamp default CURRENT_TIMESTAMP not null,
     updated_at  timestamp default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP
