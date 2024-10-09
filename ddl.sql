@@ -21,6 +21,7 @@ create table track_price_changes.products
     id          int auto_increment
         primary key,
     product_code       varchar(255)                        not null comment '상품 코드',
+    product_id       varchar(255)                        not null comment '상품 id',
     market_product_id  varchar(255)                              not null comment '마켓 상품 id',
     market_category_id varchar(255)                              not null comment '마켓 카테고리 id',
     name        varchar(255)                        not null comment '상품 이름',
