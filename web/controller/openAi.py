@@ -7,7 +7,7 @@ datafile_path = "file/product_test_embedding.csv"
 df = pd.read_csv(datafile_path)
 
 client = OpenAI(
-    api_key="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",
+    api_key="",
 )
 
 
